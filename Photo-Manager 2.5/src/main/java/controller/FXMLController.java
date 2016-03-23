@@ -133,7 +133,7 @@ public class FXMLController implements Initializable {
             comboSelectDrive.getItems().add(myPath.toString());
         }
         File[] paths;
-        // returns pathnames for files and directory
+        // returns pathnames for files and directory a
         paths = File.listRoots();
 
         // for each pathname in pathname array
