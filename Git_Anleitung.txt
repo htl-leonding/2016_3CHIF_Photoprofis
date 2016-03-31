@@ -1,0 +1,15 @@
+Initial Commit:
+Ordner auswählen, indem das Repository gespeichert werden soll. -> Git Bash und git init.
+Danach git clone und den Link aus dem Repository auf GitHub einfügen.
+
+
+Aktualisieren:
+git pull lädt das Verzeichnis aus GitHub in euer Verzeichnis und führt die neuen Änderungen mit den alten zusammen.
+IMMER VOR DEM ARBEITEN GIT PULL BENUTZEN!!!
+
+Hochladen
+git add . 
+git commit -m "Hier Änderung als Message mitgeben"
+git push
+
+git status zeigt an welche Daten noch nicht am Computer oder im GitHub aktuell sind.
