@@ -43,7 +43,7 @@
                <top>
                   <BorderPane fx:id="borderPane" prefHeight="33.0" prefWidth="500.0" BorderPane.alignment="CENTER">
                      <left>
-                        <Button fx:id="buttonLeft" mnemonicParsing="false" onAction="#handelLeftClick" text="&lt;" BorderPane.alignment="CENTER" />
+                        <Button fx:id="buttonLeft" mnemonicParsing="false" onAction="#handleLeftClick" text="&lt;" BorderPane.alignment="CENTER" />
                      </left>
                      <right>
                         <Button fx:id="buttonRight" mnemonicParsing="false" onAction="#handleRightClick" text="&gt;" BorderPane.alignment="CENTER" />

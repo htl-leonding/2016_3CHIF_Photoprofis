@@ -12,20 +12,15 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import static javafx.application.Application.launch;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -36,24 +31,17 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.TilePane;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
-import javax.imageio.ImageIO;
-import javax.imageio.ImageReader;
-import javax.imageio.metadata.IIOMetadata;
-import javax.imageio.stream.ImageInputStream;
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
+import model.Model;
 
 public class FXMLController implements Initializable {
 
     
     
     
-    //#test
+    private Model model;
+    TreeItem<File> rootc;
     
     @FXML
     private TreeView<File> treeView;//Variablen
@@ -68,8 +56,6 @@ public class FXMLController implements Initializable {
     @FXML
     private TilePane tlPane;
     @FXML
-    private BorderPane borderPane;
-    @FXML
     private Button buttonLeft;
     @FXML
     private Label textAnzeige;
@@ -77,75 +63,23 @@ public class FXMLController implements Initializable {
     private Button buttonRight;
 
     private File actFile;
-    String[] files = new String[]{"Pictures", "Desktop", "Video"};
     @FXML
     private Label lbShowMeta;
 
-    //Ein neuer Node mit dem Pfad wird erstellt
-    private TreeItem<File> createNode(File f) {
-        return new TreeItem<File>(f) {
-            private boolean isLeaf;
-            private boolean isFirstTimeChildren = true;
-            private boolean isFirstTimeLeaf = true;
-
-            @Override
-            public ObservableList<TreeItem<File>> getChildren() {
-                if (isFirstTimeChildren) {
-                    isFirstTimeChildren = false;
-                    super.getChildren().setAll(buildChildren(this));
-                }
-                return super.getChildren();
-            }
-
-            @Override
-            public boolean isLeaf() {
-                if (isFirstTimeLeaf) {
-                    isFirstTimeLeaf = false;
-                    File f = (File) getValue();
-                    isLeaf = f.isFile();
-                }
-                return isLeaf;
-            }
-            //as
-            //Treeview wird erstellt
-            private ObservableList<TreeItem<File>> buildChildren(TreeItem<File> TreeItem) {
-                File f = TreeItem.getValue();
-                if (f == null) {
-                    return FXCollections.emptyObservableList();
-                }
-                if (f.isFile()) {
-                    return FXCollections.emptyObservableList();
-                }
-                File[] files = f.listFiles();
-
-                if (files != null) {
-                    ObservableList<TreeItem<File>> children = FXCollections.observableArrayList();
-                    for (File childFile : files) {
-                        children.add(createNode(childFile));
-                    }
-                    return children;
-                }
-                return FXCollections.emptyObservableList();
-            }
-        };
-    }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-        for (int cnt = 0; cnt < files.length; cnt++) {
-            Path myPath = Paths.get(System.getProperty("user.home")).resolve(files[cnt].toString());
-            comboSelectDrive.getItems().add(myPath.toString());
-        }
-        File[] paths;
-        // returns pathnames for files and directory
-        paths = File.listRoots();
+        model = Model.getInstance();
+        Path myPath = Paths.get(System.getProperty("user.home"));
+        comboSelectDrive.getItems().add(myPath.toString());
+        
+        File[] paths; 
+        paths = File.listRoots(); // returns pathnames for files and directory
 
         // for each pathname in pathname array
         for (File pa : paths) {
-            TreeItem<File> rootc = createNode(new File(pa.toString()));
+            rootc = model.createNode(new File(pa.toString()));
             comboSelectDrive.getItems().add(rootc.getValue().getPath());
-            treeView.setRoot(new TreeItem<File>(new File(comboSelectDrive.getItems().get(0).toString())));
+            treeView.setRoot(new TreeItem<>(new File(comboSelectDrive.getItems().get(0))));
 
             //TreeView treeViewe = new TreeView<File>(roote);
             treeView.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -156,22 +90,7 @@ public class FXMLController implements Initializable {
                     if (treeView != null && treeView.getSelectionModel() != null && treeView.getSelectionModel().getSelectedItem() != null) {
                         tlPane.getChildren().clear();
                         File location = treeView.getSelectionModel().getSelectedItem().getValue();
-                        File[] files = location.listFiles();
-                        for (File file : files) {
-                            if (!file.isDirectory()) {
-                                //überprüfung ob es eine Bilddatei ist
-                                //mit länger des Array die endlänge angeben und prüfen
-                                String path = String.valueOf(file.getPath());
-
-                                if ((path.toUpperCase().contains(".JPG")) || (path.toUpperCase().contains(".PNG")) || (path.toUpperCase().contains(".JPEG"))) {
-                                    System.out.println("It's an image");
-                                    fileList.add(file);
-                                    tlPane.getChildren().addAll(createImageView(file));
-                                } else {
-                                    System.out.println("It's NOT an image");
-                                }
-                            }
-                        }
+                        model.importPictures(location);
                     }
                 }
             });
@@ -215,9 +134,7 @@ public class FXMLController implements Initializable {
                                 }
                                 showMeta(actPos);
                             } catch (FileNotFoundException e) {
-                            } catch (ImageProcessingException ex) {
-                                Logger.getLogger(FXMLController.class.getName()).log(Level.SEVERE, null, ex);
-                            } catch (IOException ex) {
+                            } catch (ImageProcessingException | IOException ex) {
                                 Logger.getLogger(FXMLController.class.getName()).log(Level.SEVERE, null, ex);
                             }
 
@@ -230,18 +147,14 @@ public class FXMLController implements Initializable {
         return imageView;
     }
 
-    private BorderPane CreateBorderPane(final File imageFile) {
-        return null;
-    }
-
     @FXML
     private void comboSelectDriveOnAction(ActionEvent event) {
-        TreeItem<File> rootc = createNode(new File(comboSelectDrive.getValue().toString()));
+        rootc = model.createNode(new File(comboSelectDrive.getValue()));
         treeView.setRoot(rootc);
     }
 
     @FXML
-    private void handelLeftClick(ActionEvent event) throws FileNotFoundException {
+    private void handleLeftClick(ActionEvent event) throws FileNotFoundException {
         int actPos= fileList.lastIndexOf(actFile)-1;
         if(actPos<0)
             actPos = fileList.size()-1;
@@ -249,14 +162,11 @@ public class FXMLController implements Initializable {
         actFile = fileList.get(actPos);     
         Image show = new Image(new FileInputStream(fileList.get(actPos)));
         imgView.setImage(show);
-        textAnzeige.setText(fileList.get(actPos).getName());
-        
-        
+        textAnzeige.setText(fileList.get(actPos).getName());  
     }
 
     @FXML
     private void handleRightClick(ActionEvent event) throws FileNotFoundException, IOException {
-
         int actPos= fileList.lastIndexOf(actFile)+1;
         if(actPos==fileList.size())
             actPos = 0;
@@ -268,7 +178,7 @@ public class FXMLController implements Initializable {
     }
  
     public void showMeta(int actPos) throws ImageProcessingException, IOException {
-        String out = "";
+        String out;
         Metadata metadata = ImageMetadataReader.readMetadata(fileList.get(actPos));
 
         for (Directory directory : metadata.getDirectories()) {
