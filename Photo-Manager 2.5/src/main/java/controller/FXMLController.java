@@ -47,7 +47,6 @@ public class FXMLController implements Initializable {
     private TreeView<File> treeView;//Variablen
     @FXML
     private ComboBox<String> comboSelectDrive;
-    private List<File> fileList;
     @FXML
     private ImageView imgView;
     @FXML
@@ -81,16 +80,15 @@ public class FXMLController implements Initializable {
             comboSelectDrive.getItems().add(rootc.getValue().getPath());
             treeView.setRoot(new TreeItem<>(new File(comboSelectDrive.getItems().get(0))));
 
-            //TreeView treeViewe = new TreeView<File>(roote);
             treeView.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
                 @Override
                 public void handle(MouseEvent event) {
-                    fileList = new LinkedList<>();
                     if (treeView != null && treeView.getSelectionModel() != null && treeView.getSelectionModel().getSelectedItem() != null) {
                         tlPane.getChildren().clear();
                         File location = treeView.getSelectionModel().getSelectedItem().getValue();
-                        model.importPictures(location);
+                        File file = model.importPictures(location);
+                        tlPane.getChildren().addAll(createImageView(file));
                     }
                 }
             });
@@ -123,10 +121,10 @@ public class FXMLController implements Initializable {
                                 imgView.setSmooth(true);
                                 imgView.setCache(true);
                                 textAnzeige.setText(imageFile.getName());
-                                for (int i = 0; i < fileList.size(); i++) {
-                                    if (actFile.getPath().equals(fileList.get(i).getPath())) {
+                                for (int i = 0; i < model.getFileList().size(); i++) {
+                                    if (actFile.getPath().equals(model.getFileList().get(i).getPath())) {
                                         if (i - 1 < 0) {
-                                            actPos = fileList.size() - 1;
+                                            actPos = model.getFileList().size() - 1;
                                         } else {
                                             actPos = i - 1;
                                         }
@@ -155,31 +153,31 @@ public class FXMLController implements Initializable {
 
     @FXML
     private void handleLeftClick(ActionEvent event) throws FileNotFoundException {
-        int actPos= fileList.lastIndexOf(actFile)-1;
+        int actPos= model.getFileList().lastIndexOf(actFile)-1;
         if(actPos<0)
-            actPos = fileList.size()-1;
+            actPos = model.getFileList().size()-1;
         
-        actFile = fileList.get(actPos);     
-        Image show = new Image(new FileInputStream(fileList.get(actPos)));
+        actFile = model.getFileList().get(actPos);     
+        Image show = new Image(new FileInputStream(model.getFileList().get(actPos)));
         imgView.setImage(show);
-        textAnzeige.setText(fileList.get(actPos).getName());  
+        textAnzeige.setText(model.getFileList().get(actPos).getName());  
     }
 
     @FXML
     private void handleRightClick(ActionEvent event) throws FileNotFoundException, IOException {
-        int actPos= fileList.lastIndexOf(actFile)+1;
-        if(actPos==fileList.size())
+        int actPos= model.getFileList().lastIndexOf(actFile)+1;
+        if(actPos==model.getFileList().size())
             actPos = 0;
         
-        actFile = fileList.get(actPos);
-        Image show = new Image(new FileInputStream(fileList.get(actPos)));
+        actFile = model.getFileList().get(actPos);
+        Image show = new Image(new FileInputStream(model.getFileList().get(actPos)));
         imgView.setImage(show);
-        textAnzeige.setText(fileList.get(actPos).getName());
+        textAnzeige.setText(model.getFileList().get(actPos).getName());
     }
  
     public void showMeta(int actPos) throws ImageProcessingException, IOException {
         String out;
-        Metadata metadata = ImageMetadataReader.readMetadata(fileList.get(actPos));
+        Metadata metadata = ImageMetadataReader.readMetadata(model.getFileList().get(actPos));
 
         for (Directory directory : metadata.getDirectories()) {
             out = "";

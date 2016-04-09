@@ -6,6 +6,7 @@
 package model;
 
 import java.io.File;
+import java.util.LinkedList;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,7 +21,7 @@ public class Model {
     private static Model instance;
     
     private Model(){
-        
+        fileList = new LinkedList<>();
     }
     public static Model getInstance()
     {
@@ -76,7 +77,7 @@ public class Model {
         };
     }
 
-    public void importPictures(File location) {
+    public File importPictures(File location) {
         File[] files = location.listFiles();
             for (File file : files) {
                 if (!file.isDirectory()) {
@@ -87,12 +88,18 @@ public class Model {
                     if ((path.toUpperCase().contains(".JPG")) || (path.toUpperCase().contains(".PNG")) || (path.toUpperCase().contains(".JPEG"))) {
                         System.out.println("It's an image");
                         fileList.add(file);
-                        //tlPane.getChildren().addAll(createImageView(file));
+                        return file;
                     } else {
                         System.out.println("It's NOT an image");
                     }
                 }
+                
             }
+            return null;
+    }
+    
+    public List<File> getFileList(){
+        return fileList;
     }
 }
     
