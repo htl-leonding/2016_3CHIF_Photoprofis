@@ -88,23 +88,9 @@ public class FXMLController implements Initializable {
                     if (treeView != null && treeView.getSelectionModel() != null && treeView.getSelectionModel().getSelectedItem() != null) {
                         tlPane.getChildren().clear();
                         File location = treeView.getSelectionModel().getSelectedItem().getValue();
-                        File[] files = location.listFiles();
-                            for (File file : files) {
-                                if (!file.isDirectory()) {
-                                    //überprüfung ob es eine Bilddatei ist
-                                    //mit länger des Array die endlänge angeben und prüfen
-                                    String path = String.valueOf(file.getPath());
-
-                                    if ((path.toUpperCase().contains(".JPG")) || (path.toUpperCase().contains(".PNG")) || (path.toUpperCase().contains(".JPEG"))) {
-                                        System.out.println("It's an image");
-                                        model.addFile(file);
-                                    } else {
-                                        System.out.println("It's NOT an image");
-                                    }
-                                }
-                            }
+                        model.importPictures(location);
                         try {
-                            tlPane.getChildren().addAll(createImageView());
+                            tlPane.getChildren().addAll(loadImages());
                         } catch (FileNotFoundException ex) {
                             Logger.getLogger(FXMLController.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -119,7 +105,7 @@ public class FXMLController implements Initializable {
                     
                     
 
-    private List<ImageView> createImageView() throws FileNotFoundException {
+    private List<ImageView> loadImages() throws FileNotFoundException {
 
         List<ImageView> images = new LinkedList<>();
         imageView = null;
@@ -128,7 +114,7 @@ public class FXMLController implements Initializable {
             final File imageFile = model.getFileList().get(i);
             imageView = new ImageView(image);
             images.add(imageView); 
-                imageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            imageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
