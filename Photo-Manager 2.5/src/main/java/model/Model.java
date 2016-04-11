@@ -88,7 +88,6 @@ public class Model {
                     if ((path.toUpperCase().contains(".JPG")) || (path.toUpperCase().contains(".PNG")) || (path.toUpperCase().contains(".JPEG"))) {
                         System.out.println("It's an image");
                         fileList.add(file);
-                        return file;
                     } else {
                         System.out.println("It's NOT an image");
                     }
@@ -100,6 +99,9 @@ public class Model {
     
     public List<File> getFileList(){
         return fileList;
+    }
+    public void addFile(File file){
+        fileList.add(file);
     }
 }
     

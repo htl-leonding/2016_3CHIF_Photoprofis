@@ -87,13 +87,30 @@ public class FXMLController implements Initializable {
                     if (treeView != null && treeView.getSelectionModel() != null && treeView.getSelectionModel().getSelectedItem() != null) {
                         tlPane.getChildren().clear();
                         File location = treeView.getSelectionModel().getSelectedItem().getValue();
-                        File file = model.importPictures(location);
-                        tlPane.getChildren().addAll(createImageView(file));
+                        File[] files = location.listFiles();
+                            for (File file : files) {
+                                if (!file.isDirectory()) {
+                                    //überprüfung ob es eine Bilddatei ist
+                                    //mit länger des Array die endlänge angeben und prüfen
+                                    String path = String.valueOf(file.getPath());
+
+                                    if ((path.toUpperCase().contains(".JPG")) || (path.toUpperCase().contains(".PNG")) || (path.toUpperCase().contains(".JPEG"))) {
+                                        System.out.println("It's an image");
+                                        model.addFile(file);
+                                        tlPane.getChildren().addAll(createImageView(file));
+                                    } else {
+                                        System.out.println("It's NOT an image");
+                                    }
+                                }
+                            }
                     }
                 }
             });
         }
     }
+            
+                    
+                    
 
     private ImageView createImageView(final File imageFile) {
 
