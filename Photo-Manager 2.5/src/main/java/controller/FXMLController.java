@@ -24,14 +24,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.TilePane;
 import model.Model;
 
@@ -41,7 +39,8 @@ public class FXMLController implements Initializable {
     
     
     private Model model;
-    TreeItem<File> rootc;
+    private TreeItem<File> rootc;
+    private ImageView imageView;
     
     @FXML
     private TreeView<File> treeView;//Variablen
@@ -49,9 +48,6 @@ public class FXMLController implements Initializable {
     private ComboBox<String> comboSelectDrive;
     @FXML
     private ImageView imgView;
-    @FXML
-    private ScrollPane scPane;
-
     @FXML
     private TilePane tlPane;
     @FXML
@@ -64,12 +60,17 @@ public class FXMLController implements Initializable {
     private File actFile;
     @FXML
     private Label lbShowMeta;
+    
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         model = Model.getInstance();
         Path myPath = Paths.get(System.getProperty("user.home"));
         comboSelectDrive.getItems().add(myPath.toString());
+        imgView.setStyle("-fx-background-color: BLACK");
+        imgView.setPreserveRatio(true);
+        imgView.setSmooth(true);
+        imgView.setCache(true);
         
         File[] paths; 
         paths = File.listRoots(); // returns pathnames for files and directory
@@ -97,69 +98,60 @@ public class FXMLController implements Initializable {
                                     if ((path.toUpperCase().contains(".JPG")) || (path.toUpperCase().contains(".PNG")) || (path.toUpperCase().contains(".JPEG"))) {
                                         System.out.println("It's an image");
                                         model.addFile(file);
-                                        tlPane.getChildren().addAll(createImageView(file));
                                     } else {
                                         System.out.println("It's NOT an image");
                                     }
                                 }
                             }
+                        try {
+                            tlPane.getChildren().addAll(createImageView());
+                        } catch (FileNotFoundException ex) {
+                            Logger.getLogger(FXMLController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     }
                 }
             });
         }
-    }
+
+        }
+    
             
                     
                     
 
-    private ImageView createImageView(final File imageFile) {
+    private List<ImageView> createImageView() throws FileNotFoundException {
 
-        ImageView imageView = null;
-        try {
-            final Image image = new Image(new FileInputStream(imageFile), 150, 0, true,
-                    true);
+        List<ImageView> images = new LinkedList<>();
+        imageView = null;
+        for(int i=0; i<model.getFileList().size(); i++){
+            final Image image = new Image(new FileInputStream(model.getFileList().get(i)),150,0,true,true);
+            final File imageFile = model.getFileList().get(i);
             imageView = new ImageView(image);
-            imageView.setFitWidth(150);
-            imageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
-                @Override
-                public void handle(MouseEvent mouseEvent) {
-
-                    if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
+            images.add(imageView); 
+                imageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+               if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
 
                         if (mouseEvent.getClickCount() == 1) {
                             try {
                                 int actPos = 0;
-                                Image image = new Image(new FileInputStream(imageFile));
-                                imgView.setImage(image);
                                 actFile = imageFile;
-                                imgView.setStyle("-fx-background-color: BLACK");
-                                imgView.setPreserveRatio(true);
-                                imgView.setSmooth(true);
-                                imgView.setCache(true);
+                                imgView.setImage(new Image(new FileInputStream(imageFile)));
                                 textAnzeige.setText(imageFile.getName());
-                                for (int i = 0; i < model.getFileList().size(); i++) {
-                                    if (actFile.getPath().equals(model.getFileList().get(i).getPath())) {
-                                        if (i - 1 < 0) {
-                                            actPos = model.getFileList().size() - 1;
-                                        } else {
-                                            actPos = i - 1;
-                                        }
-                                    }
-                                }
+                                actPos= model.getFileList().lastIndexOf(actFile);
                                 showMeta(actPos);
                             } catch (FileNotFoundException e) {
                             } catch (ImageProcessingException | IOException ex) {
                                 Logger.getLogger(FXMLController.class.getName()).log(Level.SEVERE, null, ex);
                             }
-
                         }
-                    }
-                }
+               }
+            }
             });
-        } catch (FileNotFoundException ex) {
         }
-        return imageView;
+            
+        return images;
     }
 
     @FXML
