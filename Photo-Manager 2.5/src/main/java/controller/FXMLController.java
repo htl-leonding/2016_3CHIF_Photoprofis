@@ -24,12 +24,15 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.TilePane;
 import model.Model;
 
@@ -44,7 +47,6 @@ public class FXMLController implements Initializable {
     
     @FXML
     private TreeView<File> treeView;//Variablen
-    @FXML
     private ComboBox<String> comboSelectDrive;
     @FXML
     private ImageView imgView;
@@ -60,13 +62,19 @@ public class FXMLController implements Initializable {
     private File actFile;
     @FXML
     private Label lbShowMeta;
+    @FXML
+    private ScrollPane scPane;
+    @FXML
+    private BorderPane borderPane;
+    @FXML
+    private ListView<String> fList;
     
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         model = Model.getInstance();
         Path myPath = Paths.get(System.getProperty("user.home"));
-        comboSelectDrive.getItems().add(myPath.toString());
+        fList.getItems().add(myPath.toString());
         imgView.setStyle("-fx-background-color: BLACK");
         imgView.setPreserveRatio(true);
         imgView.setSmooth(true);
@@ -78,8 +86,8 @@ public class FXMLController implements Initializable {
         // for each pathname in pathname array
         for (File pa : paths) {
             rootc = model.createNode(new File(pa.toString()));
-            comboSelectDrive.getItems().add(rootc.getValue().getPath());
-            treeView.setRoot(new TreeItem<>(new File(comboSelectDrive.getItems().get(0))));
+            fList.getItems().add(rootc.getValue().getPath());
+            treeView.setRoot(new TreeItem<File>(new File(fList.getItems().get(0).toString())));
 
             treeView.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
@@ -140,9 +148,10 @@ public class FXMLController implements Initializable {
         return images;
     }
 
+    //muss behoben werden!!!!!!!!!!!!!!!!
     @FXML
-    private void comboSelectDriveOnAction(ActionEvent event) {
-        rootc = model.createNode(new File(comboSelectDrive.getValue()));
+    private void getMouseClicked(MouseEvent event) {
+        rootc = model.createNode(new File(fList.getItems().toString()));
         treeView.setRoot(rootc);
     }
 
@@ -195,4 +204,6 @@ public class FXMLController implements Initializable {
             System.out.print("    ");
         }
     }
+
+
 }
