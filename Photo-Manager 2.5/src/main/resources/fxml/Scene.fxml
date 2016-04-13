@@ -61,16 +61,16 @@
                   </BorderPane>
                </top>
             </BorderPane>
-            <SplitPane dividerPositions="0.29797979797979796" prefHeight="160.0" prefWidth="200.0">
+            <SplitPane dividerPositions="0.4296482412060301" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
               <items>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="162.0" prefWidth="498.0">
                      <children>
-                        <ListView fx:id="fList" onMouseClicked="#getMouseClicked" prefHeight="398.0" prefWidth="145.0" />
+                        <ListView fx:id="fList" onMouseClicked="#getMouseClicked" prefHeight="168.0" prefWidth="500.0" />
                      </children>
                   </AnchorPane>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                      <children>
-                        <TreeView fx:id="treeView" prefHeight="400.0" prefWidth="349.0" />
+                        <TreeView fx:id="treeView" layoutY="-2.0" prefHeight="229.0" prefWidth="502.0" />
                      </children>
                   </AnchorPane>
               </items>

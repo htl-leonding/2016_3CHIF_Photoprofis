@@ -17,6 +17,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -26,12 +28,14 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.SplitPane;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.TilePane;
 import model.Model;
@@ -47,7 +51,6 @@ public class FXMLController implements Initializable {
     
     @FXML
     private TreeView<File> treeView;//Variablen
-    private ComboBox<String> comboSelectDrive;
     @FXML
     private ImageView imgView;
     @FXML
@@ -67,14 +70,14 @@ public class FXMLController implements Initializable {
     @FXML
     private BorderPane borderPane;
     @FXML
-    private ListView<String> fList;
+    private ListView<File> fList;
     
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         model = Model.getInstance();
         Path myPath = Paths.get(System.getProperty("user.home"));
-        fList.getItems().add(myPath.toString());
+        fList.getItems().add(myPath.toFile());
         imgView.setStyle("-fx-background-color: BLACK");
         imgView.setPreserveRatio(true);
         imgView.setSmooth(true);
@@ -86,8 +89,8 @@ public class FXMLController implements Initializable {
         // for each pathname in pathname array
         for (File pa : paths) {
             rootc = model.createNode(new File(pa.toString()));
-            fList.getItems().add(rootc.getValue().getPath());
-            treeView.setRoot(new TreeItem<File>(new File(fList.getItems().get(0).toString())));
+            fList.getItems().add(rootc.getValue());
+            treeView.setRoot(new TreeItem<File>(new File(fList.getItems().get(0).getPath().toString())));
 
             treeView.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
@@ -106,8 +109,7 @@ public class FXMLController implements Initializable {
                 }
             });
         }
-
-        }
+    }
     
             
                     
@@ -148,11 +150,18 @@ public class FXMLController implements Initializable {
         return images;
     }
 
-    //muss behoben werden!!!!!!!!!!!!!!!!
     @FXML
     private void getMouseClicked(MouseEvent event) {
-        rootc = model.createNode(new File(fList.getItems().toString()));
-        treeView.setRoot(rootc);
+        fList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<File>() {
+
+            @Override
+            public void changed(ObservableValue<? extends File> observable, File oldValue, File newValue) {
+                rootc = model.createNode(new File(newValue.getPath().toString()));
+                treeView.setRoot(rootc);;
+            }
+        });
+        
+        
     }
 
     @FXML
@@ -204,6 +213,4 @@ public class FXMLController implements Initializable {
             System.out.print("    ");
         }
     }
-
-
 }
