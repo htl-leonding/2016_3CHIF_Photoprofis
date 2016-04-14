@@ -85,7 +85,7 @@ public class Model {
                     //mit länger des Array die endlänge angeben und prüfen
                     String path = String.valueOf(file.getPath());
 
-                    if ((path.toUpperCase().contains(".JPG")) || (path.toUpperCase().contains(".PNG")) || (path.toUpperCase().contains(".JPEG"))) {
+                    if (((path.toUpperCase().contains(".JPG")) || (path.toUpperCase().contains(".PNG")) || (path.toUpperCase().contains(".JPEG")))&& !fileList.contains(new File(path))) {
                         System.out.println("It's an image");
                         fileList.add(file);
                     } else {

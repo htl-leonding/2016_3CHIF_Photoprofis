@@ -61,7 +61,6 @@ public class FXMLController implements Initializable {
     private Label textAnzeige;
     @FXML
     private Button buttonRight;
-
     private File actFile;
     @FXML
     private Label lbShowMeta;
@@ -70,14 +69,14 @@ public class FXMLController implements Initializable {
     @FXML
     private BorderPane borderPane;
     @FXML
-    private ListView<File> fList;
+    private ComboBox<String> comboSelectDrive;
     
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         model = Model.getInstance();
         Path myPath = Paths.get(System.getProperty("user.home"));
-        fList.getItems().add(myPath.toFile());
+        comboSelectDrive.getItems().add(myPath.toString());
         imgView.setStyle("-fx-background-color: BLACK");
         imgView.setPreserveRatio(true);
         imgView.setSmooth(true);
@@ -89,14 +88,15 @@ public class FXMLController implements Initializable {
         // for each pathname in pathname array
         for (File pa : paths) {
             rootc = model.createNode(new File(pa.toString()));
-            fList.getItems().add(rootc.getValue());
-            treeView.setRoot(new TreeItem<File>(new File(fList.getItems().get(0).getPath().toString())));
+
+            comboSelectDrive.getItems().add(rootc.getValue().toString());
+            treeView.setRoot(rootc);
 
             treeView.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
                 @Override
                 public void handle(MouseEvent event) {
-                    if (treeView != null && treeView.getSelectionModel() != null && treeView.getSelectionModel().getSelectedItem() != null) {
+                    if ((treeView != null && treeView.getSelectionModel() != null) && treeView.getSelectionModel().getSelectedItem() != null) {
                         tlPane.getChildren().clear();
                         File location = treeView.getSelectionModel().getSelectedItem().getValue();
                         model.importPictures(location);
@@ -105,13 +105,12 @@ public class FXMLController implements Initializable {
                         } catch (FileNotFoundException ex) {
                             Logger.getLogger(FXMLController.class.getName()).log(Level.SEVERE, null, ex);
                         }
+                    } else {
                     }
                 }
             });
         }
     }
-    
-            
                     
                     
 
@@ -148,20 +147,6 @@ public class FXMLController implements Initializable {
         }
             
         return images;
-    }
-
-    @FXML
-    private void getMouseClicked(MouseEvent event) {
-        fList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<File>() {
-
-            @Override
-            public void changed(ObservableValue<? extends File> observable, File oldValue, File newValue) {
-                rootc = model.createNode(new File(newValue.getPath().toString()));
-                treeView.setRoot(rootc);;
-            }
-        });
-        
-        
     }
 
     @FXML
@@ -212,5 +197,11 @@ public class FXMLController implements Initializable {
         for (int i = 0; i < level; i++) {
             System.out.print("    ");
         }
+    }
+
+    @FXML
+    private void comboSelectDriveOnAction(ActionEvent event) {
+        rootc = model.createNode(new File(comboSelectDrive.getValue().toString()));
+        treeView.setRoot(rootc);
     }
 }
