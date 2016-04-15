@@ -70,6 +70,10 @@ public class FXMLController implements Initializable {
     private BorderPane borderPane;
     @FXML
     private ComboBox<String> comboSelectDrive;
+    @FXML
+    private Button buttonPosFirst;
+    @FXML
+    private Button buttonPosLast;
     
 
     @Override
@@ -203,5 +207,25 @@ public class FXMLController implements Initializable {
     private void comboSelectDriveOnAction(ActionEvent event) {
         rootc = model.createNode(new File(comboSelectDrive.getValue().toString()));
         treeView.setRoot(rootc);
+    }
+
+    @FXML
+    private void handleButtonPosFirst(ActionEvent event) throws FileNotFoundException {
+        int actPos = 0;
+        
+        actFile = model.getFileList().get(actPos);
+        Image show = new Image(new FileInputStream(model.getFileList().get(actPos)));
+        imgView.setImage(show);
+        textAnzeige.setText(model.getFileList().get(actPos).getName());
+    }
+
+    @FXML
+    private void handleButtonPosLast(ActionEvent event) throws FileNotFoundException {
+        int actPos = model.getFileList().size()-1;
+        
+        actFile = model.getFileList().get(actPos);
+        Image show = new Image(new FileInputStream(model.getFileList().get(actPos)));
+        imgView.setImage(show);
+        textAnzeige.setText(model.getFileList().get(actPos).getName());
     }
 }
