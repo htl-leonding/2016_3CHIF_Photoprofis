@@ -17,27 +17,26 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.SplitPane;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.TilePane;
+import javafx.stage.Stage;
 import model.Model;
 
 public class FXMLController implements Initializable {
@@ -65,15 +64,21 @@ public class FXMLController implements Initializable {
     @FXML
     private Label lbShowMeta;
     @FXML
-    private ScrollPane scPane;
-    @FXML
     private BorderPane borderPane;
-    @FXML
-    private ComboBox<String> comboSelectDrive;
     @FXML
     private Button buttonPosFirst;
     @FXML
     private Button buttonPosLast;
+    @FXML
+    private ScrollPane FileScPane;
+    @FXML
+    private TilePane fileTlPane;
+    @FXML
+    private ScrollPane scPane;
+    @FXML
+    private ImageView teamIcon;
+    @FXML
+    private ComboBox<String> comboSelectDrive;
     
 
     @Override
@@ -85,6 +90,7 @@ public class FXMLController implements Initializable {
         imgView.setPreserveRatio(true);
         imgView.setSmooth(true);
         imgView.setCache(true);
+        teamIcon.setImage(model.getIcon());
         
         File[] paths; 
         paths = File.listRoots(); // returns pathnames for files and directory
@@ -205,7 +211,7 @@ public class FXMLController implements Initializable {
 
     @FXML
     private void comboSelectDriveOnAction(ActionEvent event) {
-        rootc = model.createNode(new File(comboSelectDrive.getValue().toString()));
+        rootc = model.createNode(new File(comboSelectDrive.getValue()));
         treeView.setRoot(rootc);
     }
 
@@ -227,5 +233,19 @@ public class FXMLController implements Initializable {
         Image show = new Image(new FileInputStream(model.getFileList().get(actPos)));
         imgView.setImage(show);
         textAnzeige.setText(model.getFileList().get(actPos).getName());
+    }
+
+    @FXML
+    private void IconClicked(MouseEvent event) throws IOException {
+        Parent root = null;
+        Stage stage = new Stage();
+        root = FXMLLoader.load(getClass().getResource("/fxml/ProjectInfo.fxml"));
+        
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add("/styles/Styles.css");
+        
+        stage.setTitle("ProjectInfo");
+        stage.setScene(scene);
+        stage.show();
     }
 }

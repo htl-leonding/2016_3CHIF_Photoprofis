@@ -6,11 +6,16 @@
 package model;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TreeItem;
+import javafx.scene.image.Image;
 
 /**
  *
@@ -102,6 +107,22 @@ public class Model {
     }
     public void addFile(File file){
         fileList.add(file);
+    }
+    
+    public Image getIcon(){
+        Image image = null;
+        try {
+            image = new Image(new FileInputStream("Unbenannt.png"));
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return image;
+    }
+    
+    public List<Image> getTeamPics(){
+        //Bilder mit Nachname reingespeichert 
+        List<Image> images = new LinkedList();
+        return images;
     }
 }
     
