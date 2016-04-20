@@ -5,6 +5,8 @@ import com.drew.imaging.ImageProcessingException;
 import com.drew.metadata.Directory;
 import com.drew.metadata.Metadata;
 import com.drew.metadata.Tag;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -120,6 +122,46 @@ public class FXMLController implements Initializable {
                 }
             });
         }
+        
+//        buttonRight.addKeyListener
+//        (new KeyAdapter()
+//        {
+//          public void keyPressed(KeyEvent e)
+//          {
+//            int key = e.getKeyCode();
+//            if (key == KeyEvent.VK_RIGHT)
+//            {
+//               int actPos= model.getFileList().lastIndexOf(actFile)+1;
+//                if(actPos==model.getFileList().size())
+//                    actPos = 0;
+//
+//                actFile = model.getFileList().get(actPos);
+//                Image show = new Image(new FileInputStream(model.getFileList().get(actPos)));
+//                imgView.setImage(show);
+//                textAnzeige.setText(model.getFileList().get(actPos).getName());
+//            }
+//          }
+//        }); 
+//        
+//        buttonLeft.addKeyListener
+//        (new KeyAdapter()
+//        {
+//          public void keyPressed(KeyEvent e)
+//          {
+//            int key = e.getKeyCode();
+//            if (key == KeyEvent.VK_LEFT)
+//            {
+//               int actPos= model.getFileList().lastIndexOf(actFile)-1;
+//                if(actPos<0)
+//                    actPos = model.getFileList().size()-1;
+//
+//                actFile = model.getFileList().get(actPos);     
+//                Image show = new Image(new FileInputStream(model.getFileList().get(actPos)));
+//                imgView.setImage(show);
+//                textAnzeige.setText(model.getFileList().get(actPos).getName());
+//            }
+//          }
+//        });
     }
                     
                     
@@ -133,6 +175,18 @@ public class FXMLController implements Initializable {
             final File imageFile = model.getFileList().get(i);
             imageView = new ImageView(image);
             images.add(imageView); 
+            
+//            ExifInterface exif = null;
+//            try {
+//                exif = new ExifInterface(path);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }  
+//            int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, 
+//                                                   ExifInterface.ORIENTATION_UNDEFINED);
+//            
+//            Bitmap bmRotated = rotateBitmap(bitmap, orientation); 
+            
             imageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -158,6 +212,50 @@ public class FXMLController implements Initializable {
             
         return images;
     }
+    
+//    public static Bitmap rotateBitmap(Bitmap bitmap, int orientation) {
+//
+//    Matrix matrix = new Matrix();
+//    switch (orientation) {
+//        case ExifInterface.ORIENTATION_NORMAL:
+//            return bitmap;
+//        case ExifInterface.ORIENTATION_FLIP_HORIZONTAL:
+//            matrix.setScale(-1, 1);
+//            break;
+//        case ExifInterface.ORIENTATION_ROTATE_180:
+//            matrix.setRotate(180);
+//            break;
+//        case ExifInterface.ORIENTATION_FLIP_VERTICAL:
+//            matrix.setRotate(180);
+//            matrix.postScale(-1, 1);
+//            break;
+//        case ExifInterface.ORIENTATION_TRANSPOSE:
+//            matrix.setRotate(90);
+//            matrix.postScale(-1, 1);
+//            break;
+//       case ExifInterface.ORIENTATION_ROTATE_90:
+//           matrix.setRotate(90);
+//           break;
+//       case ExifInterface.ORIENTATION_TRANSVERSE:
+//           matrix.setRotate(-90);
+//           matrix.postScale(-1, 1);
+//           break;
+//       case ExifInterface.ORIENTATION_ROTATE_270:
+//           matrix.setRotate(-90);
+//           break;
+//       default:
+//           return bitmap;
+//    }
+//    try {
+//        Bitmap bmRotated = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+//        bitmap.recycle();
+//        return bmRotated;
+//    }
+//    catch (OutOfMemoryError e) {
+//        e.printStackTrace();
+//        return null;
+//    }
+//}
 
     @FXML
     private void handleLeftClick(ActionEvent event) throws FileNotFoundException {
