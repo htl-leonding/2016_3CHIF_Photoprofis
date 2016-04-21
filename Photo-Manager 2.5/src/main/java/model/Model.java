@@ -119,10 +119,15 @@ public class Model {
         return image;
     }
     
-    public List<Image> getTeamPics(){
-        //Bilder mit Nachname reingespeichert 
-        List<Image> images = new LinkedList();
-        return images;
+    public String[] getTeamDiscription(){
+        
+        String[] teamDes = new String[5];
+        teamDes[0] = "";
+        teamDes[1] = "";
+        teamDes[2] = "";
+        teamDes[3] = "";
+        teamDes[4] = "";
+        return teamDes;
     }
 }
     

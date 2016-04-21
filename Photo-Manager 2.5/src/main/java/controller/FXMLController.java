@@ -36,8 +36,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.TilePane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.Model;
 
@@ -72,8 +74,6 @@ public class FXMLController implements Initializable {
     @FXML
     private Button buttonPosLast;
     @FXML
-    private ScrollPane FileScPane;
-    @FXML
     private TilePane fileTlPane;
     @FXML
     private ScrollPane scPane;
@@ -81,6 +81,14 @@ public class FXMLController implements Initializable {
     private ImageView teamIcon;
     @FXML
     private ComboBox<String> comboSelectDrive;
+    @FXML
+    private AnchorPane treeAnchor;
+    @FXML
+    private VBox vBox;
+    @FXML
+    private ScrollPane fileScPane;
+    @FXML
+    private AnchorPane picAnchor;
     
 
     @Override
@@ -335,9 +343,8 @@ public class FXMLController implements Initializable {
 
     @FXML
     private void IconClicked(MouseEvent event) throws IOException {
-        Parent root = null;
         Stage stage = new Stage();
-        root = FXMLLoader.load(getClass().getResource("/fxml/ProjectInfo.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/ProjectInfo.fxml"));
         
         Scene scene = new Scene(root);
         scene.getStylesheets().add("/styles/Styles.css");

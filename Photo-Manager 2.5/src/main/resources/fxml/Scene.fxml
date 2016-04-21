@@ -28,18 +28,18 @@
                   </AnchorPane>
                   <SplitPane dividerPositions="0.5" prefHeight="759.0" prefWidth="500.0">
                     <items>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="113.0" prefWidth="498.0">
+                        <AnchorPane fx:id="treeAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="757.0" prefWidth="250.0">
                            <children>
-                              <TreeView fx:id="treeView" layoutX="-2.0" prefHeight="757.0" prefWidth="246.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                              <TreeView fx:id="treeView" layoutX="-2.0" prefHeight="757.0" prefWidth="250.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                            </children>
                         </AnchorPane>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="757.0" prefWidth="251.0">
+                        <AnchorPane fx:id="picAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="757.0" prefWidth="250.0">
                            <children>
-                              <VBox prefHeight="757.0" prefWidth="217.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <VBox fx:id="vBox" maxWidth="-Infinity" prefHeight="757.0" prefWidth="250.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
-                                    <ScrollPane fx:id="FileScPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" maxHeight="-Infinity" prefHeight="489.0" prefWidth="500.0">
+                                    <ScrollPane fx:id="fileScPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" maxHeight="-Infinity" prefHeight="489.0" prefWidth="500.0">
                                        <content>
-                                          <TilePane fx:id="fileTlPane" alignment="CENTER" hgap="15.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="422.0" prefWidth="131.0">
+                                          <TilePane fx:id="fileTlPane" alignment="CENTER" hgap="15.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="377.0" prefWidth="250.0">
                                              <padding>
                                                 <Insets left="15.0" right="15.0" top="15.0" />
                                              </padding>
@@ -51,7 +51,7 @@
                                     </ScrollPane>
                                     <ScrollPane fx:id="scPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" maxHeight="-Infinity" prefHeight="489.0" prefWidth="500.0">
                                        <content>
-                                          <TilePane fx:id="tlPane" alignment="CENTER" hgap="15.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="382.0" prefWidth="131.0">
+                                          <TilePane fx:id="tlPane" alignment="CENTER" hgap="15.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="400.0" prefWidth="250.0">
                                              <padding>
                                                 <Insets left="15.0" right="15.0" top="15.0" />
                                              </padding>
