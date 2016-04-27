@@ -79,7 +79,15 @@
                            <bottom>
                               <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="173.0" prefWidth="537.0">
                                  <children>
-                                    <Label fx:id="lbShowMeta" alignment="TOP_LEFT" layoutX="35.0" layoutY="17.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="210.0" prefWidth="537.0" AnchorPane.bottomAnchor="-37.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                    <Label fx:id="lbShowMeta" alignment="TOP_LEFT" layoutX="35.0" layoutY="-10.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="217.0" prefWidth="537.0" AnchorPane.bottomAnchor="-34.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-10.0" />
+                                    <TextField fx:id="tfName" layoutX="168.0" layoutY="14.0" prefHeight="31.0" prefWidth="332.0" />
+                                    <Label layoutX="57.0" layoutY="19.0" text="Dateiname:" />
+                                    <TextField fx:id="tfDate" layoutX="168.0" layoutY="56.0" prefHeight="31.0" prefWidth="332.0" />
+                                    <Label layoutX="21.0" layoutY="61.0" text="Aufnahmedatum:" />
+                                    <TextField fx:id="tfPlace" layoutX="168.0" layoutY="97.0" prefHeight="31.0" prefWidth="332.0" />
+                                    <Label layoutX="41.0" layoutY="102.0" text="Aufnahmeort:" />
+                                    <TextField fx:id="tfModel" layoutX="168.0" layoutY="135.0" prefHeight="31.0" prefWidth="332.0" />
+                                    <Label layoutX="37.0" layoutY="140.0" text="Kameramodell:" />
                                  </children>
                               </AnchorPane>
                            </bottom>
