@@ -30,6 +30,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.SplitPane;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.image.Image;
@@ -84,11 +85,11 @@ public class FXMLController implements Initializable {
     @FXML
     private AnchorPane treeAnchor;
     @FXML
-    private VBox vBox;
-    @FXML
     private ScrollPane fileScPane;
     @FXML
     private AnchorPane picAnchor;
+    @FXML
+    private SplitPane spPane;
     
 
     @Override
@@ -152,7 +153,7 @@ public class FXMLController implements Initializable {
 //        }); 
 //        
 //        buttonLeft.addKeyListener
-//        (new KeyAdapter()
+//        (new KeyAdapter()<
 //        {
 //          public void keyPressed(KeyEvent e)
 //          {
@@ -352,5 +353,46 @@ public class FXMLController implements Initializable {
         stage.setTitle("ProjectInfo");
         stage.setScene(scene);
         stage.show();
+    }
+
+    @FXML
+    private void PictureFullScreen(MouseEvent event) {
+       
+    }
+
+    @FXML
+    private void getFileClicked(MouseEvent event) {
+        if(event.getClickCount()%2 == 0){
+            if(treeAnchor.getMaxWidth() == 0){
+                treeAnchor.setMinWidth(250);
+                treeAnchor.setMaxWidth(250);
+                picAnchor.setMaxWidth(250);
+                picAnchor.setMinWidth(250);
+            }
+            else{
+                treeAnchor.setMaxWidth(0);
+                treeAnchor.setMinWidth(0);
+                picAnchor.setMinWidth(500);
+                picAnchor.setMaxWidth(500);
+            }
+        }
+    }
+
+    @FXML
+    private void getPicClicked(MouseEvent event) {
+        if(event.getClickCount()%2 == 0){
+           if(treeAnchor.getMaxWidth() == 0){
+                treeAnchor.setMinWidth(250);
+                treeAnchor.setMaxWidth(250);
+                picAnchor.setMaxWidth(250);
+                picAnchor.setMinWidth(250);
+            }
+            else{
+                treeAnchor.setMaxWidth(0);
+                treeAnchor.setMinWidth(0);
+                picAnchor.setMinWidth(500);
+                picAnchor.setMaxWidth(500);
+            }
+        }
     }
 }

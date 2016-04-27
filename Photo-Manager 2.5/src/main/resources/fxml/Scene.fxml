@@ -14,80 +14,72 @@
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="783.0" prefWidth="1003.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="738.0" prefWidth="1003.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLController">
    <children>
-      <HBox alignment="CENTER">
+      <HBox alignment="CENTER" prefHeight="761.0" prefWidth="1003.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <VBox HBox.hgrow="ALWAYS">
+            <VBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="0.0" prefWidth="0.0" HBox.hgrow="ALWAYS">
                <children>
-                  <AnchorPane>
+                  <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="0.0" VBox.vgrow="ALWAYS">
                      <children>
-                        <ComboBox fx:id="comboSelectDrive" onAction="#comboSelectDriveOnAction" prefWidth="150.0" />
-                        <ImageView fx:id="teamIcon" fitHeight="25.0" fitWidth="25.0" layoutX="471.0" onMouseClicked="#IconClicked" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <ComboBox fx:id="comboSelectDrive" layoutY="2.0" onAction="#comboSelectDriveOnAction" prefWidth="150.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
                      </children>
                   </AnchorPane>
-                  <SplitPane dividerPositions="0.5" prefHeight="759.0" prefWidth="500.0">
+                  <SplitPane fx:id="spPane" dividerPositions="0.501002004008016" focusTraversable="false" minHeight="0.0" minWidth="0.0" prefHeight="710.0" prefWidth="501.0" VBox.vgrow="ALWAYS">
                     <items>
-                        <AnchorPane fx:id="treeAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="757.0" prefWidth="250.0">
+                        <AnchorPane fx:id="treeAnchor" minHeight="0.0" minWidth="0.0" prefHeight="708.0" prefWidth="251.0">
                            <children>
-                              <TreeView fx:id="treeView" layoutX="-2.0" prefHeight="757.0" prefWidth="250.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                              <TreeView fx:id="treeView" focusTraversable="false" minHeight="-Infinity" minWidth="-Infinity" prefHeight="0.0" prefWidth="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="picAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="757.0" prefWidth="250.0">
+                        <AnchorPane fx:id="picAnchor" minHeight="0.0" minWidth="0.0" prefHeight="708.0" prefWidth="240.0">
                            <children>
-                              <VBox fx:id="vBox" maxWidth="-Infinity" prefHeight="757.0" prefWidth="250.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                 <children>
-                                    <ScrollPane fx:id="fileScPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" maxHeight="-Infinity" prefHeight="489.0" prefWidth="500.0">
-                                       <content>
-                                          <TilePane fx:id="fileTlPane" alignment="CENTER" hgap="15.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="377.0" prefWidth="250.0">
-                                             <padding>
-                                                <Insets left="15.0" right="15.0" top="15.0" />
-                                             </padding>
-                                          </TilePane>
-                                       </content>
-                                       <VBox.margin>
-                                          <Insets />
-                                       </VBox.margin>
-                                    </ScrollPane>
-                                    <ScrollPane fx:id="scPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" maxHeight="-Infinity" prefHeight="489.0" prefWidth="500.0">
-                                       <content>
-                                          <TilePane fx:id="tlPane" alignment="CENTER" hgap="15.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="400.0" prefWidth="250.0">
-                                             <padding>
-                                                <Insets left="15.0" right="15.0" top="15.0" />
-                                             </padding>
-                                          </TilePane>
-                                       </content>
-                                    </ScrollPane>
-                                 </children>
-                              </VBox>
+                              <ScrollPane fx:id="fileScPane" fitToHeight="true" fitToWidth="true" focusTraversable="false" layoutY="-2.0" minHeight="0.0" minWidth="0.0" prefHeight="353.0" prefWidth="240.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <content>
+                                    <TilePane fx:id="fileTlPane" alignment="CENTER" minHeight="0.0" minWidth="0.0" onMouseClicked="#getFileClicked" prefHeight="350.0" prefTileHeight="0.0" prefTileWidth="0.0" prefWidth="250.0" />
+                                 </content>
+                              </ScrollPane>
+                              <ScrollPane fx:id="scPane" fitToHeight="true" fitToWidth="true" layoutY="348.0" minHeight="0.0" minWidth="0.0" prefHeight="355.0" prefWidth="240.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                                 <content>
+                                    <TilePane fx:id="tlPane" alignment="CENTER" hgap="15.0" onMouseClicked="#getPicClicked" prefHeight="0.0" prefWidth="0.0">
+                                       <padding>
+                                          <Insets left="15.0" right="15.0" top="15.0" />
+                                       </padding></TilePane>
+                                 </content>
+                              </ScrollPane>
                            </children>
                         </AnchorPane>
                     </items>
                   </SplitPane>
                </children>
             </VBox>
-            <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
+            <VBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="0.0" prefWidth="0.0" HBox.hgrow="ALWAYS">
                <children>
-                  <ImageView fx:id="imgView" fitHeight="387.0" fitWidth="500.0" pickOnBounds="true" preserveRatio="true" />
-                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                  <AnchorPane maxHeight="-Infinity" prefHeight="21.0" prefWidth="501.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <ImageView fx:id="teamIcon" fitHeight="31.0" fitWidth="25.0" layoutX="476.0" layoutY="2.0" nodeOrientation="INHERIT" onMouseClicked="#IconClicked" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+                  <ImageView fx:id="imgView" fitHeight="323.0" fitWidth="500.0" onMouseClicked="#PictureFullScreen" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS" />
+                  <BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="0.0" prefWidth="0.0" VBox.vgrow="ALWAYS">
                      <top>
-                        <BorderPane fx:id="borderPane" prefHeight="33.0" prefWidth="500.0" BorderPane.alignment="CENTER">
+                        <BorderPane fx:id="borderPane" prefHeight="334.0" prefWidth="501.0">
                            <center>
-                              <Label fx:id="textAnzeige" prefHeight="25.0" prefWidth="421.0" BorderPane.alignment="CENTER" />
+                              <Label fx:id="textAnzeige" minHeight="-Infinity" minWidth="-Infinity" prefHeight="18.0" prefWidth="500.0" BorderPane.alignment="CENTER" />
                            </center>
                            <bottom>
-                              <AnchorPane prefHeight="348.0" prefWidth="500.0" BorderPane.alignment="CENTER">
+                              <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="326.0" prefWidth="501.0">
                                  <children>
-                                    <Label fx:id="lbShowMeta" alignment="TOP_LEFT" layoutX="35.0" layoutY="25.0" prefHeight="299.0" prefWidth="431.0" />
+                                    <Label fx:id="lbShowMeta" alignment="TOP_LEFT" layoutX="35.0" layoutY="17.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="501.0" AnchorPane.bottomAnchor="-19.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                  </children>
                               </AnchorPane>
                            </bottom>
                            <top>
-                              <TilePane prefHeight="28.0" prefWidth="500.0">
+                              <TilePane minHeight="-Infinity" minWidth="-Infinity" prefHeight="28.0" prefWidth="0.0">
                                  <children>
                                     <Button fx:id="buttonPosFirst" mnemonicParsing="false" onAction="#handleButtonPosFirst" prefHeight="25.0" prefWidth="121.0" text="|&lt;" />
                                     <Button fx:id="buttonLeft" mnemonicParsing="false" onAction="#handleLeftClick" prefHeight="25.0" prefWidth="105.0" text="&lt;" />
-                                    <Button fx:id="buttonRight" mnemonicParsing="false" onAction="#handleRightClick" prefHeight="25.0" prefWidth="96.0" text="&gt;" />
+                                    <Button fx:id="buttonRight" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleRightClick" prefHeight="25.0" prefWidth="100.0" text="&gt;" />
                                     <Button fx:id="buttonPosLast" mnemonicParsing="false" onAction="#handleButtonPosLast" prefHeight="25.0" prefWidth="125.0" text="&gt;|" />
                                  </children>
                               </TilePane>
