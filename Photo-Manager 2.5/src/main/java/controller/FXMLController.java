@@ -325,6 +325,14 @@ public class FXMLController implements Initializable {
 
     @FXML
     private void handleButtonEdit(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/ExifFensterController.fxml"));
+        Stage stage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/ExifdataView.fxml"));
+        
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add("/styles/Styles.css");
+        
+        stage.setTitle("Metadaten");
+        stage.setScene(scene);
+        stage.show();
     }
 }
