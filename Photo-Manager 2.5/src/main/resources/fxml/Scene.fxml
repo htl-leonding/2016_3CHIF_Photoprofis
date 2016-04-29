@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import javafx.geometry.*?>
@@ -70,52 +71,44 @@
                      <viewport>
                         <Rectangle2D />
                      </viewport></ImageView>
-                  <BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="0.0" prefWidth="0.0" VBox.vgrow="ALWAYS">
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <top>
-                        <BorderPane fx:id="borderPane" prefHeight="334.0" prefWidth="501.0">
-                           <center>
-                              <Label fx:id="textAnzeige" minHeight="-Infinity" minWidth="-Infinity" prefHeight="18.0" prefWidth="500.0" BorderPane.alignment="CENTER" />
-                           </center>
-                           <bottom>
-                              <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="173.0" prefWidth="537.0">
-                                 <children>
-                                    <Label fx:id="lbShowMeta" alignment="TOP_LEFT" layoutX="35.0" layoutY="-10.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="217.0" prefWidth="537.0" AnchorPane.bottomAnchor="-34.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-10.0" />
-                                    <TextField fx:id="tfName" layoutX="168.0" layoutY="14.0" prefHeight="31.0" prefWidth="332.0" />
-                                    <Label layoutX="57.0" layoutY="19.0" text="Dateiname:" />
-                                    <TextField fx:id="tfDate" layoutX="168.0" layoutY="56.0" prefHeight="31.0" prefWidth="332.0" />
-                                    <Label layoutX="21.0" layoutY="61.0" text="Aufnahmedatum:" />
-                                    <TextField fx:id="tfPlace" layoutX="168.0" layoutY="97.0" prefHeight="31.0" prefWidth="332.0" />
-                                    <Label layoutX="41.0" layoutY="102.0" text="Aufnahmeort:" />
-                                    <TextField fx:id="tfModel" layoutX="168.0" layoutY="135.0" prefHeight="31.0" prefWidth="332.0" />
-                                    <Label layoutX="37.0" layoutY="140.0" text="Kameramodell:" />
-                                 </children>
-                              </AnchorPane>
-                           </bottom>
-                           <top>
-                              <TilePane alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="101.0" prefWidth="537.0" BorderPane.alignment="CENTER">
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Label fx:id="textAnzeige" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="500.0" />
+                              <TilePane alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="537.0">
                                  <children>
                                     <Button fx:id="buttonPosFirst" mnemonicParsing="false" onAction="#handleButtonPosFirst" prefHeight="25.0" prefWidth="121.0" text="|&lt;" />
                                     <Button fx:id="buttonLeft" mnemonicParsing="false" onAction="#handleLeftClick" prefHeight="25.0" prefWidth="105.0" text="&lt;" />
                                     <Button fx:id="buttonRight" mnemonicParsing="false" onAction="#handleRightClick" prefHeight="25.0" prefWidth="105.0" text="&gt;" />
                                     <Button fx:id="buttonPosLast" mnemonicParsing="false" onAction="#handleButtonPosLast" prefHeight="25.0" prefWidth="125.0" text="&gt;|" TilePane.alignment="CENTER" />
-                                    <Button fx:id="btRightToLeft" mnemonicParsing="false" onAction="#handelRotatingLeftButton" prefWidth="50.0" text="⟲">
+                                    <Button fx:id="btRightToLeft" mnemonicParsing="false" onAction="#handelRotatingLeftButton" prefWidth="50.0" text="⟲" TilePane.alignment="CENTER">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
+                                       <cursor>
+                                          <Cursor fx:constant="DEFAULT" />
+                                       </cursor>
                                     </Button>
-                                    <Button fx:id="btLeftToRight" mnemonicParsing="false" onAction="#handelRotatingRightButton" prefWidth="50.0" text="⟳">
+                                    <Button fx:id="btLeftToRight" mnemonicParsing="false" onAction="#handelRotatingRightButton" prefWidth="50.0" text="⟳" TilePane.alignment="CENTER">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
+                                       <cursor>
+                                          <Cursor fx:constant="DEFAULT" />
+                                       </cursor>
                                     </Button>
                                  </children>
-                                 <BorderPane.margin>
-                                    <Insets top="75.0" />
-                                 </BorderPane.margin>
                               </TilePane>
-                           </top>
-                        </BorderPane>
+                           </children>
+                        </AnchorPane>
                      </top>
+                     <center>
+                        <Label fx:id="lbShowMeta" alignment="TOP_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="104.0" prefWidth="537.0" BorderPane.alignment="CENTER" />
+                     </center>
+                     <bottom>
+                        <Button fx:id="bt_Edit" mnemonicParsing="false" onAction="#handleButtonEdit" text="Edit" BorderPane.alignment="CENTER" />
+                     </bottom>
                   </BorderPane>
                </children>
             </VBox>

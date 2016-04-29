@@ -31,6 +31,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitPane;
+import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.image.Image;
@@ -94,6 +95,8 @@ public class FXMLController implements Initializable {
     private Button btRightToLeft;
     @FXML
     private Button btLeftToRight;
+    @FXML
+    private Button bt_Edit;
     
 
     @Override
@@ -318,5 +321,10 @@ public class FXMLController implements Initializable {
     private void handelRotatingRightButton(ActionEvent event) {
         imgView.setRotate(imgView.getRotate() + 90);
         imgView.autosize();
+    }
+
+    @FXML
+    private void handleButtonEdit(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/ExifFensterController.fxml"));
     }
 }
