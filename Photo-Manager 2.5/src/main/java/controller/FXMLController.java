@@ -98,7 +98,7 @@ public class FXMLController implements Initializable {
     @FXML
     private Button bt_Edit;
     
-
+    // <editor-fold defaultstate="collapsed" desc="Initialize">
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         model = Model.getInstance();
@@ -139,9 +139,9 @@ public class FXMLController implements Initializable {
             });
         }
     }
+    // </editor-fold>            
                     
-                    
-
+    // <editor-fold defaultstate="collapsed" desc="Bild auswählen - anzeigen - MEtadatem">
     private List<ImageView> loadImages() throws FileNotFoundException {
 
         List<ImageView> images = new LinkedList<>();
@@ -181,31 +181,7 @@ public class FXMLController implements Initializable {
     {
         imgView.setRotate(180.0);
     }
-
-    @FXML
-    private void handleLeftClick(ActionEvent event) throws FileNotFoundException {
-        int actPos= model.getFileList().lastIndexOf(actFile)-1;
-        if(actPos<0)
-            actPos = model.getFileList().size()-1;
-        
-        actFile = model.getFileList().get(actPos);     
-        Image show = new Image(new FileInputStream(model.getFileList().get(actPos)));
-        imgView.setImage(show);
-        textAnzeige.setText(model.getFileList().get(actPos).getName());  
-    }
-
-    @FXML
-    private void handleRightClick(ActionEvent event) throws FileNotFoundException, IOException {
-        int actPos= model.getFileList().lastIndexOf(actFile)+1;
-        if(actPos==model.getFileList().size())
-            actPos = 0;
-        
-        actFile = model.getFileList().get(actPos);
-        Image show = new Image(new FileInputStream(model.getFileList().get(actPos)));
-        imgView.setImage(show);
-        textAnzeige.setText(model.getFileList().get(actPos).getName());
-    }
- 
+    
     public void showMeta(int actPos) throws ImageProcessingException, IOException {
         String out;
         Metadata metadata = ImageMetadataReader.readMetadata(model.getFileList().get(actPos));
@@ -231,51 +207,6 @@ public class FXMLController implements Initializable {
             System.out.print("    ");
         }
     }
-
-    @FXML
-    private void comboSelectDriveOnAction(ActionEvent event) {
-        rootc = model.createNode(new File(comboSelectDrive.getValue()));
-        treeView.setRoot(rootc);
-    }
-
-    @FXML
-    private void handleButtonPosFirst(ActionEvent event) throws FileNotFoundException {
-        int actPos = 0;
-        
-        actFile = model.getFileList().get(actPos);
-        Image show = new Image(new FileInputStream(model.getFileList().get(actPos)));
-        imgView.setImage(show);
-        textAnzeige.setText(model.getFileList().get(actPos).getName());
-    }
-
-    @FXML
-    private void handleButtonPosLast(ActionEvent event) throws FileNotFoundException {
-        int actPos = model.getFileList().size()-1;
-        
-        actFile = model.getFileList().get(actPos);
-        Image show = new Image(new FileInputStream(model.getFileList().get(actPos)));
-        imgView.setImage(show);
-        textAnzeige.setText(model.getFileList().get(actPos).getName());
-    }
-
-    @FXML
-    private void IconClicked(MouseEvent event) throws IOException {
-        Stage stage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/ProjectInfo.fxml"));
-        
-        Scene scene = new Scene(root);
-        scene.getStylesheets().add("/styles/Styles.css");
-        
-        stage.setTitle("ProjectInfo");
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    @FXML
-    private void PictureFullScreen(MouseEvent event) {
-       
-    }
-
     @FXML
     private void getFileClicked(MouseEvent event) {
         if(event.getClickCount()%2 == 0){
@@ -311,18 +242,43 @@ public class FXMLController implements Initializable {
             }
         }
     }
-
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Buttons First-toLast Pos">
     @FXML
-    private void handelRotatingLeftButton(ActionEvent event) {
-        imgView.setRotate(imgView.getRotate() - 90);
+    private void handleButtonPosFirst(ActionEvent event) throws FileNotFoundException {
+        int actPos = 0;
+        
+        actFile = model.getFileList().get(actPos);
+        Image show = new Image(new FileInputStream(model.getFileList().get(actPos)));
+        imgView.setImage(show);
+        textAnzeige.setText(model.getFileList().get(actPos).getName());
     }
 
     @FXML
-    private void handelRotatingRightButton(ActionEvent event) {
-        imgView.setRotate(imgView.getRotate() + 90);
-        imgView.autosize();
+    private void handleButtonPosLast(ActionEvent event) throws FileNotFoundException {
+        int actPos = model.getFileList().size()-1;
+        
+        actFile = model.getFileList().get(actPos);
+        Image show = new Image(new FileInputStream(model.getFileList().get(actPos)));
+        imgView.setImage(show);
+        textAnzeige.setText(model.getFileList().get(actPos).getName());
     }
-
+// </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Fenster: Exif, Projectinfo">
+    @FXML
+    private void IconClicked(MouseEvent event) throws IOException {
+        Stage stage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/ProjectInfo.fxml"));
+        
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add("/styles/Styles.css");
+        
+        stage.setTitle("ProjectInfo");
+        stage.setScene(scene);
+        stage.show();
+    }
     @FXML
     private void handleButtonEdit(ActionEvent event) throws IOException {
         Stage stage = new Stage();
@@ -334,5 +290,55 @@ public class FXMLController implements Initializable {
         stage.setTitle("Metadaten");
         stage.setScene(scene);
         stage.show();
+    }
+    @FXML
+    private void PictureFullScreen(MouseEvent event) {
+       
+    }
+// </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Rotate Buttons">
+    @FXML
+    private void handelRotatingLeftButton(ActionEvent event) {
+        imgView.setRotate(imgView.getRotate() - 90);
+    }
+
+    @FXML
+    private void handelRotatingRightButton(ActionEvent event) {
+        imgView.setRotate(imgView.getRotate() + 90);
+        imgView.autosize();
+    }
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Buttons Left-Right">
+    @FXML
+    private void handleLeftClick(ActionEvent event) throws FileNotFoundException {
+        int actPos= model.getFileList().lastIndexOf(actFile)-1;
+        if(actPos<0)
+            actPos = model.getFileList().size()-1;
+        
+        actFile = model.getFileList().get(actPos);     
+        Image show = new Image(new FileInputStream(model.getFileList().get(actPos)));
+        imgView.setImage(show);
+        textAnzeige.setText(model.getFileList().get(actPos).getName());  
+    }
+
+    @FXML
+    private void handleRightClick(ActionEvent event) throws FileNotFoundException, IOException {
+        int actPos= model.getFileList().lastIndexOf(actFile)+1;
+        if(actPos==model.getFileList().size())
+            actPos = 0;
+        
+        actFile = model.getFileList().get(actPos);
+        Image show = new Image(new FileInputStream(model.getFileList().get(actPos)));
+        imgView.setImage(show);
+        textAnzeige.setText(model.getFileList().get(actPos).getName());
+    }
+    // </editor-fold>
+    
+    @FXML
+    private void comboSelectDriveOnAction(ActionEvent event) {
+        rootc = model.createNode(new File(comboSelectDrive.getValue()));
+        treeView.setRoot(rootc);
     }
 }
