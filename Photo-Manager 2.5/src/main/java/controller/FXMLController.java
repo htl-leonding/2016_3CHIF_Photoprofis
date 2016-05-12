@@ -29,6 +29,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitPane;
+import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.image.Image;
@@ -79,14 +80,22 @@ public class FXMLController implements Initializable {
     @FXML
     private AnchorPane picAnchor;
     @FXML
+<<<<<<< HEAD
+=======
+    private SplitPane spPane;
+    @FXML
+>>>>>>> origin/master
     private Button btRightToLeft;
     @FXML
     private Button btLeftToRight;
     @FXML
     private Button bt_Edit;
+<<<<<<< HEAD
     private static ImageView img;
     @FXML
     private SplitPane splitP;
+=======
+>>>>>>> origin/master
     
     // <editor-fold defaultstate="collapsed" desc="Initialize">
     @Override
@@ -198,8 +207,8 @@ public class FXMLController implements Initializable {
             System.out.print("    ");
         }
     }
-
     @FXML
+<<<<<<< HEAD
     private void getPicClicked(MouseEvent event) {
         if(event.getClickCount()%2 == 0){
             if(treeAnchor.getMaxHeight() == 0){
@@ -209,6 +218,41 @@ public class FXMLController implements Initializable {
             else{
                 treeAnchor.setMaxHeight(0);
                 picAnchor.setMaxHeight(720);
+=======
+    private void getFileClicked(MouseEvent event) {
+        if(event.getClickCount()%2 == 0){
+            if(treeAnchor.getMaxWidth() == 0){
+                treeAnchor.setMinWidth(250);
+                treeAnchor.setMaxWidth(250);
+                picAnchor.setMaxWidth(250);
+                picAnchor.setMinWidth(250);
+            }
+            else{
+                treeAnchor.setMaxWidth(0);
+                treeAnchor.setMinWidth(0);
+                picAnchor.setMinWidth(500);
+                picAnchor.setMaxWidth(500);
+>>>>>>> origin/master
+            }
+        }
+    }
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Buttons First-toLast Pos">
+    @FXML
+    private void getPicClicked(MouseEvent event) {
+        if(event.getClickCount()%2 == 0){
+           if(treeAnchor.getMaxWidth() == 0){
+                treeAnchor.setMinWidth(250);
+                treeAnchor.setMaxWidth(250);
+                picAnchor.setMaxWidth(250);
+                picAnchor.setMinWidth(250);
+            }
+            else{
+                treeAnchor.setMaxWidth(0);
+                treeAnchor.setMinWidth(0);
+                picAnchor.setMinWidth(500);
+                picAnchor.setMaxWidth(500);
             }
         }
     }
@@ -249,6 +293,8 @@ public class FXMLController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+<<<<<<< HEAD
+=======
     @FXML
     private void handleButtonEdit(ActionEvent event) throws IOException {
         Stage stage = new Stage();
@@ -261,6 +307,20 @@ public class FXMLController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+>>>>>>> origin/master
+    @FXML
+    private void handleButtonEdit(ActionEvent event) throws IOException {
+        Stage stage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/ExifdataView.fxml"));
+        
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add("/styles/Styles.css");
+        
+        stage.setTitle("Metadaten");
+        stage.setScene(scene);
+        stage.show();
+    }
+<<<<<<< HEAD
     
     @FXML
     private void PictureFullScreen(MouseEvent event) {
@@ -282,6 +342,34 @@ public class FXMLController implements Initializable {
                 }
             }
         }
+=======
+// </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Rotate Buttons">
+    @FXML
+    private void handelRotatingLeftButton(ActionEvent event) {
+        imgView.setRotate(imgView.getRotate() - 90);
+    }
+
+    @FXML
+    private void handelRotatingRightButton(ActionEvent event) {
+        imgView.setRotate(imgView.getRotate() + 90);
+        imgView.autosize();
+    }
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Buttons Left-Right">
+    @FXML
+    private void handleLeftClick(ActionEvent event) throws FileNotFoundException {
+        int actPos= model.getFileList().lastIndexOf(actFile)-1;
+        if(actPos<0)
+            actPos = model.getFileList().size()-1;
+        
+        actFile = model.getFileList().get(actPos);     
+        Image show = new Image(new FileInputStream(model.getFileList().get(actPos)));
+        imgView.setImage(show);
+        textAnzeige.setText(model.getFileList().get(actPos).getName());  
+>>>>>>> origin/master
     }
     public static Image ActImage(){
         return img.getImage();
@@ -296,9 +384,28 @@ public class FXMLController implements Initializable {
     }
 
     @FXML
+<<<<<<< HEAD
     private void handelRotatingRightButton(ActionEvent event) {
         imgView.setRotate(imgView.getRotate() + 90);
         imgView.autosize();
+=======
+    private void handleRightClick(ActionEvent event) throws FileNotFoundException, IOException {
+        int actPos= model.getFileList().lastIndexOf(actFile)+1;
+        if(actPos==model.getFileList().size())
+            actPos = 0;
+        
+        actFile = model.getFileList().get(actPos);
+        Image show = new Image(new FileInputStream(model.getFileList().get(actPos)));
+        imgView.setImage(show);
+        textAnzeige.setText(model.getFileList().get(actPos).getName());
+    }
+    // </editor-fold>
+    
+    @FXML
+    private void comboSelectDriveOnAction(ActionEvent event) {
+        rootc = model.createNode(new File(comboSelectDrive.getValue()));
+        treeView.setRoot(rootc);
+>>>>>>> origin/master
     }
     // </editor-fold>
     
