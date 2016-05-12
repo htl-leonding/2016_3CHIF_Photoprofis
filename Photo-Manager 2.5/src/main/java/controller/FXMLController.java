@@ -5,8 +5,6 @@ import com.drew.imaging.ImageProcessingException;
 import com.drew.metadata.Directory;
 import com.drew.metadata.Metadata;
 import com.drew.metadata.Tag;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -38,9 +36,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.TilePane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.Model;
 
@@ -69,13 +65,9 @@ public class FXMLController implements Initializable {
     @FXML
     private Label lbShowMeta;
     @FXML
-    private BorderPane borderPane;
-    @FXML
     private Button buttonPosFirst;
     @FXML
     private Button buttonPosLast;
-    @FXML
-    private TilePane fileTlPane;
     @FXML
     private ScrollPane scPane;
     @FXML
@@ -85,13 +77,18 @@ public class FXMLController implements Initializable {
     @FXML
     private AnchorPane treeAnchor;
     @FXML
-    private ScrollPane fileScPane;
-    @FXML
     private AnchorPane picAnchor;
     @FXML
-    private SplitPane spPane;
+    private Button btRightToLeft;
+    @FXML
+    private Button btLeftToRight;
+    @FXML
+    private Button bt_Edit;
+    private static ImageView img;
+    @FXML
+    private SplitPane splitP;
     
-
+    // <editor-fold defaultstate="collapsed" desc="Initialize">
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         model = Model.getInstance();
@@ -102,6 +99,7 @@ public class FXMLController implements Initializable {
         imgView.setSmooth(true);
         imgView.setCache(true);
         teamIcon.setImage(model.getIcon());
+        img = imgView;
         
         File[] paths; 
         paths = File.listRoots(); // returns pathnames for files and directory
@@ -131,50 +129,10 @@ public class FXMLController implements Initializable {
                 }
             });
         }
-        
-//        buttonRight.addKeyListener
-//        (new KeyAdapter()
-//        {
-//          public void keyPressed(KeyEvent e)
-//          {
-//            int key = e.getKeyCode();
-//            if (key == KeyEvent.VK_RIGHT)
-//            {
-//               int actPos= model.getFileList().lastIndexOf(actFile)+1;
-//                if(actPos==model.getFileList().size())
-//                    actPos = 0;
-//
-//                actFile = model.getFileList().get(actPos);
-//                Image show = new Image(new FileInputStream(model.getFileList().get(actPos)));
-//                imgView.setImage(show);
-//                textAnzeige.setText(model.getFileList().get(actPos).getName());
-//            }
-//          }
-//        }); 
-//        
-//        buttonLeft.addKeyListener
-//        (new KeyAdapter()<
-//        {
-//          public void keyPressed(KeyEvent e)
-//          {
-//            int key = e.getKeyCode();
-//            if (key == KeyEvent.VK_LEFT)
-//            {
-//               int actPos= model.getFileList().lastIndexOf(actFile)-1;
-//                if(actPos<0)
-//                    actPos = model.getFileList().size()-1;
-//
-//                actFile = model.getFileList().get(actPos);     
-//                Image show = new Image(new FileInputStream(model.getFileList().get(actPos)));
-//                imgView.setImage(show);
-//                textAnzeige.setText(model.getFileList().get(actPos).getName());
-//            }
-//          }
-//        });
     }
+    // </editor-fold>            
                     
-                    
-
+    // <editor-fold defaultstate="collapsed" desc="Bild auswählen - anzeigen - MEtadatem">
     private List<ImageView> loadImages() throws FileNotFoundException {
 
         List<ImageView> images = new LinkedList<>();
@@ -183,19 +141,7 @@ public class FXMLController implements Initializable {
             final Image image = new Image(new FileInputStream(model.getFileList().get(i)),150,0,true,true);
             final File imageFile = model.getFileList().get(i);
             imageView = new ImageView(image);
-            images.add(imageView); 
-            
-//            ExifInterface exif = null;
-//            try {
-//                exif = new ExifInterface(path);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }  
-//            int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, 
-//                                                   ExifInterface.ORIENTATION_UNDEFINED);
-//            
-//            Bitmap bmRotated = rotateBitmap(bitmap, orientation); 
-            
+            images.add(imageView);        
             imageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -222,74 +168,11 @@ public class FXMLController implements Initializable {
         return images;
     }
     
-//    public static Bitmap rotateBitmap(Bitmap bitmap, int orientation) {
-//
-//    Matrix matrix = new Matrix();
-//    switch (orientation) {
-//        case ExifInterface.ORIENTATION_NORMAL:
-//            return bitmap;
-//        case ExifInterface.ORIENTATION_FLIP_HORIZONTAL:
-//            matrix.setScale(-1, 1);
-//            break;
-//        case ExifInterface.ORIENTATION_ROTATE_180:
-//            matrix.setRotate(180);
-//            break;
-//        case ExifInterface.ORIENTATION_FLIP_VERTICAL:
-//            matrix.setRotate(180);
-//            matrix.postScale(-1, 1);
-//            break;
-//        case ExifInterface.ORIENTATION_TRANSPOSE:
-//            matrix.setRotate(90);
-//            matrix.postScale(-1, 1);
-//            break;
-//       case ExifInterface.ORIENTATION_ROTATE_90:
-//           matrix.setRotate(90);
-//           break;
-//       case ExifInterface.ORIENTATION_TRANSVERSE:
-//           matrix.setRotate(-90);
-//           matrix.postScale(-1, 1);
-//           break;
-//       case ExifInterface.ORIENTATION_ROTATE_270:
-//           matrix.setRotate(-90);
-//           break;
-//       default:
-//           return bitmap;
-//    }
-//    try {
-//        Bitmap bmRotated = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
-//        bitmap.recycle();
-//        return bmRotated;
-//    }
-//    catch (OutOfMemoryError e) {
-//        e.printStackTrace();
-//        return null;
-//    }
-//}
-
-    @FXML
-    private void handleLeftClick(ActionEvent event) throws FileNotFoundException {
-        int actPos= model.getFileList().lastIndexOf(actFile)-1;
-        if(actPos<0)
-            actPos = model.getFileList().size()-1;
-        
-        actFile = model.getFileList().get(actPos);     
-        Image show = new Image(new FileInputStream(model.getFileList().get(actPos)));
-        imgView.setImage(show);
-        textAnzeige.setText(model.getFileList().get(actPos).getName());  
+    public void rotateBitmap(int rotation)
+    {
+        imgView.setRotate(180.0);
     }
-
-    @FXML
-    private void handleRightClick(ActionEvent event) throws FileNotFoundException, IOException {
-        int actPos= model.getFileList().lastIndexOf(actFile)+1;
-        if(actPos==model.getFileList().size())
-            actPos = 0;
-        
-        actFile = model.getFileList().get(actPos);
-        Image show = new Image(new FileInputStream(model.getFileList().get(actPos)));
-        imgView.setImage(show);
-        textAnzeige.setText(model.getFileList().get(actPos).getName());
-    }
- 
+    
     public void showMeta(int actPos) throws ImageProcessingException, IOException {
         String out;
         Metadata metadata = ImageMetadataReader.readMetadata(model.getFileList().get(actPos));
@@ -317,11 +200,21 @@ public class FXMLController implements Initializable {
     }
 
     @FXML
-    private void comboSelectDriveOnAction(ActionEvent event) {
-        rootc = model.createNode(new File(comboSelectDrive.getValue()));
-        treeView.setRoot(rootc);
+    private void getPicClicked(MouseEvent event) {
+        if(event.getClickCount()%2 == 0){
+            if(treeAnchor.getMaxHeight() == 0){
+                treeAnchor.setMaxHeight(360);
+                picAnchor.setMaxHeight(360);
+            }
+            else{
+                treeAnchor.setMaxHeight(0);
+                picAnchor.setMaxHeight(720);
+            }
+        }
     }
-
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Buttons First-toLast Pos">
     @FXML
     private void handleButtonPosFirst(ActionEvent event) throws FileNotFoundException {
         int actPos = 0;
@@ -341,7 +234,9 @@ public class FXMLController implements Initializable {
         imgView.setImage(show);
         textAnzeige.setText(model.getFileList().get(actPos).getName());
     }
-
+// </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Fenster: Exif, Projectinfo">
     @FXML
     private void IconClicked(MouseEvent event) throws IOException {
         Stage stage = new Stage();
@@ -354,45 +249,93 @@ public class FXMLController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-
+    @FXML
+    private void handleButtonEdit(ActionEvent event) throws IOException {
+        Stage stage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/ExifdataView.fxml"));
+        
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add("/styles/Styles.css");
+        
+        stage.setTitle("Metadaten");
+        stage.setScene(scene);
+        stage.show();
+    }
+    
     @FXML
     private void PictureFullScreen(MouseEvent event) {
-       
-    }
-
-    @FXML
-    private void getFileClicked(MouseEvent event) {
-        if(event.getClickCount()%2 == 0){
-            if(treeAnchor.getMaxWidth() == 0){
-                treeAnchor.setMinWidth(250);
-                treeAnchor.setMaxWidth(250);
-                picAnchor.setMaxWidth(250);
-                picAnchor.setMinWidth(250);
-            }
-            else{
-                treeAnchor.setMaxWidth(0);
-                treeAnchor.setMinWidth(0);
-                picAnchor.setMinWidth(500);
-                picAnchor.setMaxWidth(500);
-            }
-        }
-    }
-
-    @FXML
-    private void getPicClicked(MouseEvent event) {
-        if(event.getClickCount()%2 == 0){
-           if(treeAnchor.getMaxWidth() == 0){
-                treeAnchor.setMinWidth(250);
-                treeAnchor.setMaxWidth(250);
-                picAnchor.setMaxWidth(250);
-                picAnchor.setMinWidth(250);
-            }
-            else{
-                treeAnchor.setMaxWidth(0);
-                treeAnchor.setMinWidth(0);
-                picAnchor.setMinWidth(500);
-                picAnchor.setMaxWidth(500);
+       if(imgView.getImage() != null){
+            if(event.getClickCount()%2 == 0){
+                try {
+                    Stage stage = new Stage();
+                    Parent root = FXMLLoader.load(getClass().getResource("/fxml/FullScreen.fxml"));
+                
+                    Scene scene = new Scene(root);
+                    scene.getStylesheets().add("/styles/Styles.css");
+                
+                    stage.setTitle("ProjectInfo");
+                    stage.setScene(scene);
+                    stage.setFullScreen(true);
+                    stage.show();
+                } catch (IOException ex) {
+                    Logger.getLogger(FXMLController.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
     }
+    public static Image ActImage(){
+        return img.getImage();
+    }
+    
+// </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Rotate Buttons">
+    @FXML
+    private void handelRotatingLeftButton(ActionEvent event) {
+        imgView.setRotate(imgView.getRotate() - 90);
+    }
+
+    @FXML
+    private void handelRotatingRightButton(ActionEvent event) {
+        imgView.setRotate(imgView.getRotate() + 90);
+        imgView.autosize();
+    }
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Buttons Left-Right">
+    @FXML
+    private void handleLeftClick(ActionEvent event) throws FileNotFoundException {
+        int actPos= model.getFileList().lastIndexOf(actFile)-1;
+        if(actPos<0)
+            actPos = model.getFileList().size()-1;
+        
+        actFile = model.getFileList().get(actPos);     
+        Image show = new Image(new FileInputStream(model.getFileList().get(actPos)));
+        imgView.setImage(show);
+        textAnzeige.setText(model.getFileList().get(actPos).getName());  
+    }
+
+    @FXML
+    private void handleRightClick(ActionEvent event) throws FileNotFoundException, IOException {
+        int actPos= model.getFileList().lastIndexOf(actFile)+1;
+        if(actPos==model.getFileList().size())
+            actPos = 0;
+        
+        actFile = model.getFileList().get(actPos);
+        Image show = new Image(new FileInputStream(model.getFileList().get(actPos)));
+        imgView.setImage(show);
+        textAnzeige.setText(model.getFileList().get(actPos).getName());
+    }
+    // </editor-fold>
+    
+    @FXML
+    private void comboSelectDriveOnAction(ActionEvent event) {
+        rootc = model.createNode(new File(comboSelectDrive.getValue()));
+        treeView.setRoot(rootc);
+    }
+
+    @FXML
+    private void ChangeSize(MouseEvent event) {
+    }
+    
 }
