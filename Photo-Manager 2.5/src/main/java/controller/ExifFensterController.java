@@ -23,12 +23,4 @@ public class ExifFensterController {
     private TextField tfAufnahmeOrt;
     @FXML
     private TextField tfKameramodel;
-    @FXML
-    private Button bt_sortPics;
-
-    @FXML
-    private void handleButtonSortPics(ActionEvent event) {
-        
-    }
-    
 }

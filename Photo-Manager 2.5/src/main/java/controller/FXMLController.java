@@ -87,6 +87,8 @@ public class FXMLController implements Initializable {
     private static ImageView img;
     @FXML
     private SplitPane splitP;
+    @FXML
+    private Button bt_Sort;
     
     // <editor-fold defaultstate="collapsed" desc="Initialize">
     @Override
@@ -336,6 +338,10 @@ public class FXMLController implements Initializable {
 
     @FXML
     private void ChangeSize(MouseEvent event) {
+    }
+
+    @FXML
+    private void handleButtonSort(ActionEvent event) {
     }
     
 }

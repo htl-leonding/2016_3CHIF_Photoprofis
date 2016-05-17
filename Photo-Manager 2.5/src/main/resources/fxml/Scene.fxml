@@ -92,7 +92,12 @@
                         <Label fx:id="lbShowMeta" alignment="TOP_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="104.0" prefWidth="537.0" BorderPane.alignment="CENTER" />
                      </center>
                      <bottom>
-                        <Button fx:id="bt_Edit" mnemonicParsing="false" onAction="#handleButtonEdit" text="Edit" BorderPane.alignment="CENTER" />
+                        <AnchorPane prefHeight="0.0" prefWidth="537.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Button fx:id="bt_Edit" layoutX="199.0" mnemonicParsing="false" onAction="#handleButtonEdit" text="Edit" />
+                              <Button fx:id="bt_Sort" layoutX="269.0" mnemonicParsing="false" onAction="#handleButtonSort" text="Sort" />
+                           </children>
+                        </AnchorPane>
                      </bottom>
                   </BorderPane>
                </children>
