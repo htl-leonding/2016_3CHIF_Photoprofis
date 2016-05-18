@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ExifFensterController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ExifFensterController">
    <children>
-      <Label layoutX="107.0" layoutY="257.0" text="Kameramodel:" />
-      <Label layoutX="107.0" layoutY="213.0" text="Aufnahmeort" />
-      <Label layoutX="107.0" layoutY="177.0" text="Aufnahmedatum:" />
-      <Label layoutX="107.0" layoutY="138.0" text="Name:" />
-      <Label layoutX="245.0" layoutY="81.0" text="Bilddaten" />
+      <Label fx:id="lbTwo" layoutX="107.0" layoutY="213.0" text="Typ:" />
+      <Label fx:id="lbThree" layoutX="107.0" layoutY="177.0" text="Resolution:" />
+      <Label fx:id="lbFour" layoutX="107.0" layoutY="138.0" text="Name:" />
+      <Label fx:id="lbFive" layoutX="245.0" layoutY="81.0" text="Bilddaten bearbeiten" />
       <TextField fx:id="tfName" layoutX="245.0" layoutY="134.0" />
       <TextField fx:id="tfAufnahmeDatum" layoutX="245.0" layoutY="173.0" />
       <TextField fx:id="tfAufnahmeOrt" layoutX="245.0" layoutY="209.0" />
-      <TextField fx:id="tfKameramodel" layoutX="245.0" layoutY="253.0" />
    </children>
 </AnchorPane>

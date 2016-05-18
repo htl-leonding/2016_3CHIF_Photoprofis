@@ -49,6 +49,7 @@ public class FXMLController implements Initializable {
     private Model model;
     private TreeItem<File> rootc;
     private ImageView imageView;
+    private static int actPos = 0;
     
     @FXML
     private TreeView<File> treeView;//Variablen
@@ -151,17 +152,15 @@ public class FXMLController implements Initializable {
                if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
 
                         if (mouseEvent.getClickCount() == 1) {
-                            try {
-                                int actPos = 0;
+                                actPos = 0;
                                 actFile = imageFile;
+                            try {
                                 imgView.setImage(new Image(new FileInputStream(imageFile)));
-                                textAnzeige.setText(imageFile.getName());
-                                actPos= model.getFileList().lastIndexOf(actFile);
-                                showMeta(actPos);
-                            } catch (FileNotFoundException e) {
-                            } catch (ImageProcessingException | IOException ex) {
+                            } catch (FileNotFoundException ex) {
                                 Logger.getLogger(FXMLController.class.getName()).log(Level.SEVERE, null, ex);
                             }
+                                
+                                actPos= model.getFileList().lastIndexOf(actFile);
                         }
                }
             }
@@ -359,5 +358,10 @@ public class FXMLController implements Initializable {
         stage.setScene(myScene);
         stage.show();
     }
-    
+        /**
+     * @return the actPos
+     */
+    public static int getActPos() {
+        return actPos;
+    }
 }
