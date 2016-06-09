@@ -70,9 +70,8 @@ public class ProjectInfoController implements Initializable {
         }
     }
 
-    //muss noch gemacht werden!
     private void setProjectText() {
-        projectBeschreibung.setText("Dieses Projekt ist dafür da, Fotos anzeigen und diese bearbeiten zu können. In ");
+        projectBeschreibung.setText("Die Bilder von Beispielweise einer Kamera oder eines Handy werden sehr oft zur Sicherung \nauf den Computer übertragen. Möchte man jetzt die Urlaubsbilder der Familie oder \nFreunden präsentieren, sind die Bilder oft schwer zu finden und durcheinander vermischt.");
     }
 
     //muss noch gemacht werden! 

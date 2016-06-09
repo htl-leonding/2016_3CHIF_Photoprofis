@@ -68,7 +68,7 @@
                   </HBox>
                </children>
             </VBox>
-            <TextArea fx:id="projectBeschreibung" disable="true" minHeight="0.0" minWidth="0.0" prefHeight="121.0" prefWidth="540.0" promptText="Beschreibung des Projekts" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <TextArea fx:id="projectBeschreibung" editable="false" minHeight="0.0" minWidth="0.0" prefHeight="121.0" prefWidth="540.0" promptText="Beschreibung des Projekts" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
          </children>
       </AnchorPane>
    </center>

@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.Button?>
@@ -17,12 +11,15 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLController">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLController">
    <children>
       <HBox alignment="CENTER" prefHeight="761.0" prefWidth="1003.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -42,7 +39,7 @@
                         </AnchorPane>
                         <AnchorPane fx:id="picAnchor" minHeight="0.0" minWidth="0.0" prefHeight="360.0" prefWidth="533.0">
                            <children>
-                              <ScrollPane fx:id="scPane" fitToWidth="true" hbarPolicy="NEVER" layoutY="348.0" minHeight="0.0" minWidth="0.0" prefHeight="360.0" prefWidth="533.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <ScrollPane fx:id="scPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" layoutY="348.0" minHeight="0.0" minWidth="0.0" prefHeight="360.0" prefWidth="533.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <content>
                                     <TilePane fx:id="tlPane" alignment="CENTER" minHeight="360.0" minWidth="620.0" onMouseClicked="#getPicClicked" prefHeight="360.0" prefWidth="620.0">
                                        <padding>
@@ -64,13 +61,13 @@
                         <ImageView fx:id="teamIcon" fitHeight="31.0" fitWidth="25.0" layoutX="476.0" layoutY="2.0" nodeOrientation="INHERIT" onMouseClicked="#IconClicked" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                      </children>
                   </AnchorPane>
-                  <ImageView fx:id="imgView" fitHeight="323.0" fitWidth="593.0" onMouseClicked="#PictureFullScreen" pickOnBounds="true" preserveRatio="true" VBox.vgrow="NEVER">
+                  <ImageView fx:id="imgView" fitHeight="358.0" fitWidth="593.0" onMouseClicked="#PictureFullScreen" pickOnBounds="true" preserveRatio="true" VBox.vgrow="NEVER">
                      <viewport>
                         <Rectangle2D />
                      </viewport></ImageView>
-                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                  <BorderPane prefHeight="307.0" prefWidth="644.0">
                      <top>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                        <AnchorPane prefHeight="288.0" prefWidth="644.0" BorderPane.alignment="CENTER">
                            <children>
                               <BorderPane>
                                  <center>
@@ -96,17 +93,17 @@
                                           <Button fx:id="buttonLeft" mnemonicParsing="false" onAction="#handleLeftClick" prefHeight="25.0" prefWidth="105.0" text="&lt;" GridPane.columnIndex="1" />
                                           <Button fx:id="buttonRight" mnemonicParsing="false" onAction="#handleRightClick" prefHeight="25.0" prefWidth="105.0" text="&gt;" GridPane.columnIndex="2" />
                                           <Button fx:id="buttonPosLast" mnemonicParsing="false" onAction="#handleButtonPosLast" prefHeight="25.0" prefWidth="125.0" text="&gt;|" GridPane.columnIndex="3" />
-                                          <Button fx:id="btRightToLeft" mnemonicParsing="false" onAction="#handelRotatingLeftButton" prefWidth="50.0" text="⟲" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                          <Button fx:id="btRightToLeft" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" onAction="#handelRotatingLeftButton" prefWidth="50.0" text="⟲" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                              <font>
-                                                <Font size="18.0" />
+                                                <Font size="16.0" />
                                              </font>
                                              <GridPane.margin>
                                                 <Insets left="30.0" />
                                              </GridPane.margin>
                                           </Button>
-                                          <Button fx:id="btLeftToRight" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handelRotatingRightButton" prefWidth="50.0" text="⟳" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                          <Button fx:id="btLeftToRight" alignment="CENTER" contentDisplay="CENTER" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" onAction="#handelRotatingRightButton" prefWidth="50.0" text="⟳" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="2">
                                              <font>
-                                                <Font size="18.0" />
+                                                <Font size="16.0" />
                                              </font>
                                              <GridPane.margin>
                                                 <Insets left="30.0" />
