@@ -112,7 +112,7 @@ public class Model {
     public Image getIcon(){
         Image image = null;
         try {
-            image = new Image(new FileInputStream("Unbenannt.png"));
+            image = new Image(new FileInputStream("Logo.png"));
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
         }

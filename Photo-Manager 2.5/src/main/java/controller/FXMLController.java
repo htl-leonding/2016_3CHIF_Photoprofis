@@ -36,6 +36,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
 import model.Model;
@@ -341,7 +342,22 @@ public class FXMLController implements Initializable {
     }
 
     @FXML
-    private void handleButtonSort(ActionEvent event) {
+    private void handleButtonSort(ActionEvent event) throws IOException {
+        Stage stage = new Stage();
+        
+        stage.setTitle("Photo Sort");
+
+        FXMLLoader myLoader = new FXMLLoader(getClass().getResource("/fxml/FXMLSort.fxml"));
+
+        Pane myPane = (Pane)myLoader.load();
+
+        FXMLSortController controller = (FXMLSortController) myLoader.getController();
+
+        controller.setPrevStage(stage);
+
+        Scene myScene = new Scene(myPane);        
+        stage.setScene(myScene);
+        stage.show();
     }
     
 }
