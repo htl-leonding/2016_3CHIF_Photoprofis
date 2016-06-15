@@ -74,9 +74,10 @@ public class ChooseDateFXMLController implements Initializable {
                     alert.showAndWait();
                     
                     DirectoryChooser dc = new DirectoryChooser();
-                    File file = dc.showDialog(FXMLSortController.getActualStage());
+                    File file = dc.showDialog(FXMLController.getActStage());
                     
                     model.moveFiles(file.toString());
+                    
                     
                 }
                 else{

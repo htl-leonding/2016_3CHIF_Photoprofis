@@ -15,6 +15,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.control.Alert;
@@ -24,7 +25,7 @@ public class ModelSort {
     LocalDate beginningDate;
     LocalDate endDate;
     LinkedList<File> folderFiles = new LinkedList<>();
-    private static LinkedList<File> tempFiles = new LinkedList<>();
+    private static List<File> tempFiles = Model.getInstance().getFileList();
     
     public ModelSort(LocalDate beginningDate, LocalDate endDate){
         this.beginningDate = beginningDate;
@@ -37,8 +38,7 @@ public class ModelSort {
     public boolean calcDate(LocalDate other){
         return (beginningDate.isBefore(other) && endDate.isAfter(other))|| beginningDate.equals(other) || endDate.equals(other);
     }
-     public void moveFiles(String pathnameFolder){
-        ModelSort calc = new ModelSort(beginningDate, endDate);
+     public void moveFiles(String pathnameFolder) {
         for(int i = 0; i<tempFiles.size(); i++){
             try {
                 BasicFileAttributes bfa = Files.readAttributes(tempFiles.get(i).toPath(), BasicFileAttributes.class);
@@ -68,11 +68,7 @@ public class ModelSort {
         Alert alert = new Alert(Alert.AlertType.INFORMATION, "Sucessfully transfered "+folderFiles.size()+" pictures!");
         alert.setHeaderText(null);
         alert.showAndWait();
-        System.exit(0);
         
     }
-     public static void addTempFile(File file){
-         tempFiles.add(file);
-     }
     
 }

@@ -91,6 +91,7 @@ public class FXMLController implements Initializable {
     private SplitPane splitP;
     @FXML
     private Button bt_Sort;
+    private static Stage stage;
     
     
     
@@ -252,29 +253,31 @@ public class FXMLController implements Initializable {
     // <editor-fold defaultstate="collapsed" desc="Fenster: Exif, Projectinfo">
     @FXML
     private void IconClicked(MouseEvent event) throws IOException {
-        Stage stage = new Stage();
+        Stage st = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/ProjectInfo.fxml"));
         
         Scene scene = new Scene(root);
         scene.getStylesheets().add("/styles/Styles.css");
         
-        stage.setTitle("ProjectInfo");
-        stage.setScene(scene);
-        stage.show();
+        st.setTitle("ProjectInfo");
+        st.setScene(scene);
+        stage = st;
+        st.show();
     }
     @FXML
     private void handleButtonEdit(ActionEvent event) throws IOException {
         disableButtons();
         bt_Sort.setDisable(true);
-        Stage stage = new Stage();
+        Stage st = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/ExifdataView.fxml"));
         
         Scene scene = new Scene(root);
         scene.getStylesheets().add("/styles/Styles.css");
         
-        stage.setTitle("Metadaten");
-        stage.setScene(scene);
-        stage.show();
+        st.setTitle("Metadaten");
+        st.setScene(scene);
+        stage = st;
+        st.show();
     }
     
     @FXML
@@ -282,15 +285,16 @@ public class FXMLController implements Initializable {
        if(imgView.getImage() != null){
             if(event.getClickCount()%2 == 0){
                 try {
-                    Stage stage = new Stage();
+                    Stage st = new Stage();
                     Parent root = FXMLLoader.load(getClass().getResource("/fxml/FullScreen.fxml"));
                 
                     Scene scene = new Scene(root);
                     scene.getStylesheets().add("/styles/Styles.css");
                 
-                    stage.setTitle("ProjectInfo");
-                    stage.setScene(scene);
-                    stage.setFullScreen(true);
+                    st.setTitle("ProjectInfo");
+                    st.setScene(scene);
+                    st.setFullScreen(true);
+                    stage = st;
                     stage.show();
                 } catch (IOException ex) {
                     Logger.getLogger(FXMLController.class.getName()).log(Level.SEVERE, null, ex);
@@ -375,19 +379,13 @@ public class FXMLController implements Initializable {
         bt_Edit.setDisable(true);
         disableButtons();
         Stage stage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/ChooseDateFXML.fxml"));
         
-        stage.setTitle("Photo Sort");
-
-        FXMLLoader myLoader = new FXMLLoader(getClass().getResource("/fxml/FXMLSort.fxml"));
-
-        Pane myPane = (Pane)myLoader.load();
-
-        FXMLSortController controller = (FXMLSortController) myLoader.getController();
-
-        controller.setPrevStage(stage);
-
-        Scene myScene = new Scene(myPane); 
-        stage.setScene(myScene);
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add("/styles/Styles.css");
+        
+        stage.setTitle("Choose Date");
+        stage.setScene(scene);
         stage.show();
     }
     private void enableButtons()
@@ -416,5 +414,8 @@ public class FXMLController implements Initializable {
      */
     public static int getActPos() {
         return actPos;
+    }
+    public static Stage getActStage(){
+        return stage;
     }
 }
