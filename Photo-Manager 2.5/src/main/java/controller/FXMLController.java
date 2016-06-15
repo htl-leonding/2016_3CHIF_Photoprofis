@@ -308,12 +308,28 @@ public class FXMLController implements Initializable {
     @FXML
     private void handelRotatingLeftButton(ActionEvent event) {
         imgView.setRotate(imgView.getRotate() - 90);
+        MatchPicSize();
     }
 
     @FXML
     private void handelRotatingRightButton(ActionEvent event) {
         imgView.setRotate(imgView.getRotate() + 90);
-        imgView.autosize();
+        MatchPicSize();
+    }
+    
+    public void MatchPicSize(){
+        if(imgView.getRotate() >= 90 && imgView.getRotate() < 180||imgView.getRotate() > 180 && imgView.getRotate() <= 270){
+            imgView.setScaleX((ActImage().getWidth()/imgView.getImage().getWidth())/1.5);
+            imgView.setScaleY((ActImage().getHeight()/imgView.getImage().getHeight())*1.5);
+        }
+        else if(imgView.getRotate() <= -90 && imgView.getRotate() > -180||imgView.getRotate() < -180 && imgView.getRotate() >= -270){
+            imgView.setScaleX((ActImage().getWidth()/imgView.getImage().getWidth())/1.5);
+            imgView.setScaleY((ActImage().getHeight()/imgView.getImage().getHeight()*1.5));
+        }
+        else{
+            imgView.setScaleX(ActImage().getWidth()/imgView.getImage().getWidth());
+            imgView.setScaleY(ActImage().getHeight()/imgView.getImage().getHeight());
+        }
     }
     // </editor-fold>
     
