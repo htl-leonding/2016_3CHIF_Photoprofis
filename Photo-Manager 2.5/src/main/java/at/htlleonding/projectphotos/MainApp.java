@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 
 public class MainApp extends Application {
@@ -16,8 +17,12 @@ public class MainApp extends Application {
         Scene scene = new Scene(root);
         scene.getStylesheets().add("/styles/Styles.css");
         
-        stage.setTitle("Photomanger 2.5");
+        stage.setTitle("Photomanger");
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
+        
+        
+
     }
 }

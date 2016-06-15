@@ -156,6 +156,9 @@ public class FXMLController implements Initializable {
                                 actFile = imageFile;
                             try {
                                 imgView.setImage(new Image(new FileInputStream(imageFile)));
+                                imgView.setPreserveRatio(true);
+                                imgView.setSmooth(true);
+                                imgView.setCache(true);  
                             } catch (FileNotFoundException ex) {
                                 Logger.getLogger(FXMLController.class.getName()).log(Level.SEVERE, null, ex);
                             }
