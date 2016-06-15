@@ -92,9 +92,14 @@ public class FXMLController implements Initializable {
     @FXML
     private Button bt_Sort;
     
+    
+    
     // <editor-fold defaultstate="collapsed" desc="Initialize">
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        disableButtons();
+        bt_Sort.setDisable(true);
+        bt_Edit.setDisable(true);
         model = Model.getInstance();
         Path myPath = Paths.get(System.getProperty("user.home"));
         comboSelectDrive.getItems().add(myPath.toString());
@@ -120,6 +125,9 @@ public class FXMLController implements Initializable {
                 @Override
                 public void handle(MouseEvent event) {
                     if ((treeView != null && treeView.getSelectionModel() != null) && treeView.getSelectionModel().getSelectedItem() != null) {
+                        enableButtons();
+                        bt_Sort.setDisable(false);
+                        bt_Edit.setDisable(false);
                         tlPane.getChildren().clear();
                         File location = treeView.getSelectionModel().getSelectedItem().getValue();
                         model.importPictures(location);
@@ -256,6 +264,8 @@ public class FXMLController implements Initializable {
     }
     @FXML
     private void handleButtonEdit(ActionEvent event) throws IOException {
+        disableButtons();
+        bt_Sort.setDisable(true);
         Stage stage = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/ExifdataView.fxml"));
         
@@ -345,6 +355,9 @@ public class FXMLController implements Initializable {
 
     @FXML
     private void handleButtonSort(ActionEvent event) throws IOException {
+        
+        bt_Edit.setDisable(true);
+        disableButtons();
         Stage stage = new Stage();
         
         stage.setTitle("Photo Sort");
@@ -357,9 +370,30 @@ public class FXMLController implements Initializable {
 
         controller.setPrevStage(stage);
 
-        Scene myScene = new Scene(myPane);        
+        Scene myScene = new Scene(myPane); 
         stage.setScene(myScene);
         stage.show();
+    }
+    private void enableButtons()
+    {
+        bt_Sort.setDisable(false);
+        bt_Edit.setDisable(false);
+        bt_Sort.setDisable(false);
+        buttonLeft.setDisable(false);
+        buttonRight.setDisable(false);
+        buttonPosFirst.setDisable(false);
+        buttonPosLast.setDisable(false);
+        btRightToLeft.setDisable(false);
+        btLeftToRight.setDisable(false);
+    }
+    private void disableButtons()
+    {
+        buttonLeft.setDisable(true);
+        buttonRight.setDisable(true);
+        buttonPosFirst.setDisable(true);
+        buttonPosLast.setDisable(true);
+        btRightToLeft.setDisable(true);
+        btLeftToRight.setDisable(true);
     }
         /**
      * @return the actPos
