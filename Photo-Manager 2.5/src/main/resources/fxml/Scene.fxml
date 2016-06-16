@@ -72,57 +72,6 @@
                         <Rectangle2D />
                      </viewport></ImageView>
                   <BorderPane prefHeight="307.0" prefWidth="644.0">
-                     <top>
-                        <AnchorPane prefHeight="288.0" prefWidth="644.0" BorderPane.alignment="CENTER">
-                           <children>
-                              <BorderPane>
-                                 <center>
-                                    <Label fx:id="textAnzeige" alignment="CENTER" contentDisplay="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="644.0" />
-                                 </center>
-                              </BorderPane>
-                              <TilePane alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="163.0" prefWidth="644.0">
-                                 <children>
-                                    <GridPane alignment="CENTER">
-                                       <columnConstraints>
-                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-                                       </columnConstraints>
-                                       <rowConstraints>
-                                          <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                       </rowConstraints>
-                                       <children>
-                                          <Button fx:id="buttonPosFirst" mnemonicParsing="false" onAction="#handleButtonPosFirst" prefHeight="25.0" prefWidth="121.0" text="|&lt;" />
-                                          <Button fx:id="buttonLeft" mnemonicParsing="false" onAction="#handleLeftClick" prefHeight="25.0" prefWidth="105.0" text="&lt;" GridPane.columnIndex="1" />
-                                          <Button fx:id="buttonRight" mnemonicParsing="false" onAction="#handleRightClick" prefHeight="25.0" prefWidth="105.0" text="&gt;" GridPane.columnIndex="2" />
-                                          <Button fx:id="buttonPosLast" mnemonicParsing="false" onAction="#handleButtonPosLast" prefHeight="25.0" prefWidth="125.0" text="&gt;|" GridPane.columnIndex="3" />
-                                          <Button fx:id="btRightToLeft" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" onAction="#handelRotatingLeftButton" prefWidth="50.0" text="⟲" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                             <font>
-                                                <Font size="16.0" />
-                                             </font>
-                                             <GridPane.margin>
-                                                <Insets left="30.0" />
-                                             </GridPane.margin>
-                                          </Button>
-                                          <Button fx:id="btLeftToRight" alignment="CENTER" contentDisplay="CENTER" minHeight="0.0" minWidth="0.0" mnemonicParsing="false" onAction="#handelRotatingRightButton" prefWidth="50.0" text="⟳" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="2">
-                                             <font>
-                                                <Font size="16.0" />
-                                             </font>
-                                             <GridPane.margin>
-                                                <Insets left="30.0" />
-                                             </GridPane.margin>
-                                          </Button>
-                                       </children>
-                                    </GridPane>
-                                 </children>
-                              </TilePane>
-                              <Label fx:id="lbShowMeta" alignment="TOP_LEFT" layoutX="61.0" layoutY="134.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="113.0" prefWidth="537.0" />
-                           </children>
-                        </AnchorPane>
-                     </top>
                      <bottom>
                         <AnchorPane prefHeight="0.0" prefWidth="537.0" BorderPane.alignment="CENTER">
                            <children>
@@ -135,14 +84,72 @@
                                  <rowConstraints>
                                     <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
-                                 <children>
-                                    <Button fx:id="bt_Edit" mnemonicParsing="false" onAction="#handleButtonEdit" text="Edit" />
-                                    <Button fx:id="bt_Sort" mnemonicParsing="false" onAction="#handleButtonSort" text="Sort" GridPane.columnIndex="2" />
-                                 </children>
                               </GridPane>
                            </children>
                         </AnchorPane>
                      </bottom>
+                     <center>
+                        <AnchorPane prefHeight="288.0" prefWidth="644.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <BorderPane />
+                              <TilePane alignment="CENTER" layoutX="-1.0" layoutY="66.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="163.0" prefWidth="644.0">
+                                 <children>
+                                    <GridPane alignment="CENTER">
+                                       <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                       <children>
+                                          <Button fx:id="buttonPosFirst" mnemonicParsing="false" onAction="#handleButtonPosFirst" prefHeight="25.0" prefWidth="121.0" text="|&lt;" />
+                                          <Button fx:id="buttonLeft" mnemonicParsing="false" onAction="#handleLeftClick" prefHeight="25.0" prefWidth="105.0" text="&lt;" GridPane.columnIndex="1" />
+                                          <Button fx:id="buttonRight" mnemonicParsing="false" onAction="#handleRightClick" prefHeight="25.0" prefWidth="105.0" text="&gt;" GridPane.columnIndex="2" />
+                                          <Button fx:id="buttonPosLast" mnemonicParsing="false" onAction="#handleButtonPosLast" prefHeight="25.0" prefWidth="125.0" text="&gt;|" GridPane.columnIndex="3" />
+                                          <Button fx:id="btRightToLeft" mnemonicParsing="false" onAction="#handelRotatingLeftButton" prefWidth="50.0" text="⟲" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                             <GridPane.margin>
+                                                <Insets left="30.0" />
+                                             </GridPane.margin>
+                                          </Button>
+                                          <Button fx:id="btLeftToRight" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handelRotatingRightButton" prefWidth="50.0" text="⟳" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                             <GridPane.margin>
+                                                <Insets left="30.0" />
+                                             </GridPane.margin>
+                                          </Button>
+                                          <Button fx:id="bt_Edit" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleButtonEdit" prefWidth="50.0" text="Edit" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                                             <GridPane.margin>
+                                                <Insets left="30.0" />
+                                             </GridPane.margin>
+                                          </Button>
+                                          <Button fx:id="bt_Sort" mnemonicParsing="false" onAction="#handleButtonSort" prefWidth="50.0" text="Sort" GridPane.columnIndex="2" GridPane.rowIndex="7">
+                                             <GridPane.margin>
+                                                <Insets left="30.0" />
+                                             </GridPane.margin>
+                                          </Button>
+                                       </children>
+                                    </GridPane>
+                                 </children>
+                              </TilePane>
+                              <Label fx:id="textAnzeige" alignment="CENTER" contentDisplay="CENTER" layoutY="14.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="644.0" />
+                           </children>
+                        </AnchorPane>
+                     </center>
                   </BorderPane>
                </children>
             </VBox>

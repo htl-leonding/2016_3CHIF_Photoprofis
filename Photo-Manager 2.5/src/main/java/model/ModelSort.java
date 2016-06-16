@@ -62,7 +62,12 @@ public class ModelSort {
                         @Override
                         public void run() {
                             try {
+<<<<<<< Updated upstream
                                 Files.move(folderFile.toPath(), Paths.get(pathnameFile));
+=======
+                                Files.copy(folderFile.toPath(), Paths.get(pathnameFile));
+                                //Files.move(folderFile.toPath(), Paths.get(pathnameFile));
+>>>>>>> Stashed changes
                             } catch (IOException ex) {
                                 Logger.getLogger(ModelSort.class.getName()).log(Level.SEVERE, null, ex);
                             }

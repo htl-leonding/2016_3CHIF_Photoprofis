@@ -323,11 +323,11 @@ public class FXMLController implements Initializable {
     
     public void MatchPicSize(){
         if(imgView.getRotate() >= 90 && imgView.getRotate() < 180||imgView.getRotate() > 180 && imgView.getRotate() <= 270){
-            imgView.setScaleX((ActImage().getWidth()/imgView.getImage().getWidth())/1.5);
+            imgView.setScaleX((ActImage().getWidth()/imgView.getImage().getWidth())/1.7);
             imgView.setScaleY((ActImage().getHeight()/imgView.getImage().getHeight())*1.5);
         }
         else if(imgView.getRotate() <= -90 && imgView.getRotate() > -180||imgView.getRotate() < -180 && imgView.getRotate() >= -270){
-            imgView.setScaleX((ActImage().getWidth()/imgView.getImage().getWidth())/1.5);
+            imgView.setScaleX((ActImage().getWidth()/imgView.getImage().getWidth())/1.7);
             imgView.setScaleY((ActImage().getHeight()/imgView.getImage().getHeight()*1.5));
         }
         else if(imgView.getRotate() >= 360 || imgView.getRotate() <= -360){
