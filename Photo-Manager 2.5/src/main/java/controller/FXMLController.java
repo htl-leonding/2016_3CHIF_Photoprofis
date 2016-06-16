@@ -98,7 +98,7 @@ public class FXMLController implements Initializable {
     // <editor-fold defaultstate="collapsed" desc="Initialize">
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        disableButtons();
+//        disableButtons();
 //        bt_Sort.setDisable(true);
 //        bt_Edit.setDisable(true);
         model = Model.getInstance();
@@ -126,7 +126,7 @@ public class FXMLController implements Initializable {
                 @Override
                 public void handle(MouseEvent event) {
                     if ((treeView != null && treeView.getSelectionModel() != null) && treeView.getSelectionModel().getSelectedItem() != null) {
-                        enableButtons();
+   //                     enableButtons();
                         bt_Sort.setDisable(false);
                         bt_Edit.setDisable(false);
                         tlPane.getChildren().clear();
@@ -266,7 +266,7 @@ public class FXMLController implements Initializable {
     }
     @FXML
     private void handleButtonEdit(ActionEvent event) throws IOException {
-        disableButtons();
+//        disableButtons();
 //        bt_Sort.setDisable(true);
         Stage st = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/ExifdataView.fxml"));
@@ -330,6 +330,11 @@ public class FXMLController implements Initializable {
             imgView.setScaleX((ActImage().getWidth()/imgView.getImage().getWidth())/1.5);
             imgView.setScaleY((ActImage().getHeight()/imgView.getImage().getHeight()*1.5));
         }
+        else if(imgView.getRotate() == 360 || imgView.getRotate() == -360){
+            imgView.setRotate(0);
+            imgView.setScaleX(ActImage().getWidth()/imgView.getImage().getWidth());
+            imgView.setScaleY(ActImage().getHeight()/imgView.getImage().getHeight());
+        }
         else{
             imgView.setScaleX(ActImage().getWidth()/imgView.getImage().getWidth());
             imgView.setScaleY(ActImage().getHeight()/imgView.getImage().getHeight());
@@ -377,7 +382,7 @@ public class FXMLController implements Initializable {
     private void handleButtonSort(ActionEvent event) throws IOException {
         
 //        bt_Edit.setDisable(true);
-        disableButtons();
+        //disableButtons();
         Stage stage = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/ChooseDateFXML.fxml"));
         
@@ -388,8 +393,8 @@ public class FXMLController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-    private void enableButtons()
-    {
+//    private void enableButtons()
+//    {
 //        bt_Sort.setDisable(false);
 //        bt_Edit.setDisable(false);
 //        bt_Sort.setDisable(false);
@@ -399,19 +404,19 @@ public class FXMLController implements Initializable {
 //        buttonPosLast.setDisable(false);
 //        btRightToLeft.setDisable(false);
 //        btLeftToRight.setDisable(false);
-    }
-    private void disableButtons()
-    {
-//        buttonLeft.setDisable(true);
-//        buttonRight.setDisable(true);
-//        buttonPosFirst.setDisable(true);
-//        buttonPosLast.setDisable(true);
-//        btRightToLeft.setDisable(true);
-//        btLeftToRight.setDisable(true);
-    }
-        /**
-     * @return the actPos
-     */
+//    }
+//    private void disableButtons()
+//    {
+////        buttonLeft.setDisable(true);
+////        buttonRight.setDisable(true);
+////        buttonPosFirst.setDisable(true);
+////        buttonPosLast.setDisable(true);
+////        btRightToLeft.setDisable(true);
+////        btLeftToRight.setDisable(true);
+//    }
+//        /**
+//     * @return the actPos
+//     */
     public static int getActPos() {
         return actPos;
     }
