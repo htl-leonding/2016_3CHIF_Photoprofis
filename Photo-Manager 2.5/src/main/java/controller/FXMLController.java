@@ -99,8 +99,8 @@ public class FXMLController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         disableButtons();
-        bt_Sort.setDisable(true);
-        bt_Edit.setDisable(true);
+//        bt_Sort.setDisable(true);
+//        bt_Edit.setDisable(true);
         model = Model.getInstance();
         Path myPath = Paths.get(System.getProperty("user.home"));
         comboSelectDrive.getItems().add(myPath.toString());
@@ -267,7 +267,7 @@ public class FXMLController implements Initializable {
     @FXML
     private void handleButtonEdit(ActionEvent event) throws IOException {
         disableButtons();
-        bt_Sort.setDisable(true);
+//        bt_Sort.setDisable(true);
         Stage st = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/ExifdataView.fxml"));
         
@@ -376,7 +376,7 @@ public class FXMLController implements Initializable {
     @FXML
     private void handleButtonSort(ActionEvent event) throws IOException {
         
-        bt_Edit.setDisable(true);
+//        bt_Edit.setDisable(true);
         disableButtons();
         Stage stage = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/ChooseDateFXML.fxml"));
@@ -390,24 +390,24 @@ public class FXMLController implements Initializable {
     }
     private void enableButtons()
     {
-        bt_Sort.setDisable(false);
-        bt_Edit.setDisable(false);
-        bt_Sort.setDisable(false);
-        buttonLeft.setDisable(false);
-        buttonRight.setDisable(false);
-        buttonPosFirst.setDisable(false);
-        buttonPosLast.setDisable(false);
-        btRightToLeft.setDisable(false);
-        btLeftToRight.setDisable(false);
+//        bt_Sort.setDisable(false);
+//        bt_Edit.setDisable(false);
+//        bt_Sort.setDisable(false);
+//        buttonLeft.setDisable(false);
+//        buttonRight.setDisable(false);
+//        buttonPosFirst.setDisable(false);
+//        buttonPosLast.setDisable(false);
+//        btRightToLeft.setDisable(false);
+//        btLeftToRight.setDisable(false);
     }
     private void disableButtons()
     {
-        buttonLeft.setDisable(true);
-        buttonRight.setDisable(true);
-        buttonPosFirst.setDisable(true);
-        buttonPosLast.setDisable(true);
-        btRightToLeft.setDisable(true);
-        btLeftToRight.setDisable(true);
+//        buttonLeft.setDisable(true);
+//        buttonRight.setDisable(true);
+//        buttonPosFirst.setDisable(true);
+//        buttonPosLast.setDisable(true);
+//        btRightToLeft.setDisable(true);
+//        btLeftToRight.setDisable(true);
     }
         /**
      * @return the actPos
