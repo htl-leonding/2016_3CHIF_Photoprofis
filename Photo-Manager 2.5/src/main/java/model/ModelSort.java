@@ -18,6 +18,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.scene.control.Alert;
 
 public class ModelSort {
@@ -54,21 +55,30 @@ public class ModelSort {
         pathnameFolder = pathnameFolder +"\\"+ beginningDate+" - "+endDate;
         File file = new File(pathnameFolder);
         System.out.println("Directory "+pathnameFolder+" created: "+file.mkdir());
-        for (File folderFile : folderFiles) {
+        for (final File folderFile : folderFiles) {
             if(folderFile!=null){
-                String pathnameFile = pathnameFolder+"/"+folderFile.getName();
-                try {
-                    Files.move(folderFile.toPath(), Paths.get(pathnameFile));
-                    System.err.println("Picture "+folderFile.getName()+" sucessfully moved to "+pathnameFile);
-                } catch (IOException ex) {
-                    Logger.getLogger(ChooseDateFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+                final String pathnameFile = pathnameFolder+"/"+folderFile.getName();
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                Files.move(folderFile.toPath(), Paths.get(pathnameFile));
+                            } catch (IOException ex) {
+                                Logger.getLogger(ModelSort.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                    });
+                   
+                    System.out.println("Picture "+folderFile.getName()+" sucessfully moved to "+pathnameFile);
                 }
             }
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Sucessfully transfered "+folderFiles.size()+" pictures!");
+            alert.setHeaderText(null);
+            alert.showAndWait();
         }
-        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Sucessfully transfered "+folderFiles.size()+" pictures!");
-        alert.setHeaderText(null);
-        alert.showAndWait();
         
-    }
+        
+    
     
 }
+
